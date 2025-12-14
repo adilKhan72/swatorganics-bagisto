@@ -3,6 +3,7 @@
 namespace Webkul\Shipping\Carriers;
 
 use Webkul\Checkout\Models\CartShippingRate;
+use Webkul\Checkout\Facades\Cart;
 
 class Free extends AbstractShipping
 {
@@ -20,19 +21,49 @@ class Free extends AbstractShipping
      */
     protected $method = 'free_free';
 
-    /**
-     * Calculate rate for free shipping.
-     *
-     * @return CartShippingRate|false
-     */
+    // Adil Edited Here Commented default Calculate method and Added new Method to only show free shipping if order is above threshold.
+    // /**
+    //  * Calculate rate for free shipping.
+    //  *
+    //  * @return CartShippingRate|false
+    //  */
+    // public function calculate()
+    // {
+    //     if (! $this->isAvailable()) {
+    //         return false;
+    //     }
+
+    //     return $this->getRate();
+    // }
+
     public function calculate()
     {
         if (! $this->isAvailable()) {
             return false;
         }
 
+        // Get the active cart (correct in Bagisto 2.3.x)
+        $cart = Cart::getCart();
+
+        if (! $cart) {
+            return false;
+        }
+
+        // Correct subtotal property in Bagisto 2.3.x
+        $orderTotal = floatval($cart->sub_total);
+
+        // Configured minimum order for free shipping
+        $min = floatval($this->getConfigData('minimum_order_amount'));
+
+        // Enforce rule: free shipping applies only when subtotal >= minimum
+        if ($min > 0 && $orderTotal < $min) {
+            return false;
+        }
+
+        // Return the free shipping rate
         return $this->getRate();
     }
+
 
     /**
      * Get rate.
