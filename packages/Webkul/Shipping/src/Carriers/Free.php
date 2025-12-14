@@ -21,7 +21,7 @@ class Free extends AbstractShipping
      */
     protected $method = 'free_free';
 
-    // Adil Edited Here Commented default Calculate method and Added new Method to only show free shipping if order is above threshold.
+    // Adil Edited Here Commented default Calculate method and Added new Method to only show free shipping if order is above (Minimum Order Amount - minimum_order_amount) threshold.
     // /**
     //  * Calculate rate for free shipping.
     //  *

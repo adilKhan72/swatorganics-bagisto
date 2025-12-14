@@ -4,6 +4,7 @@ namespace Webkul\Shipping\Carriers;
 
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\CartShippingRate;
+use Webkul\Shipping\Carriers\Free;
 
 class FlatRate extends AbstractShipping
 {
@@ -21,15 +22,46 @@ class FlatRate extends AbstractShipping
      */
     protected $method = 'flatrate_flatrate';
 
-    /**
-     * Calculate rate for flatrate.
-     *
-     * @return \Webkul\Checkout\Models\CartShippingRate|false
-     */
+
+    // Adil Edited Here Commented default Calculate method and Added new Method to only show free flat rate shipping method if order is below (Minimum Order Amount - minimum_order_amount) threshold.
+    // /**
+    //  * Calculate rate for flatrate.
+    //  *
+    //  * @return \Webkul\Checkout\Models\CartShippingRate|false
+    //  */
+    // public function calculate()
+    // {
+    //     if (! $this->isAvailable()) {
+    //         return false;
+    //     }
+
+    //     return $this->getRate();
+    // }
+
     public function calculate()
     {
         if (! $this->isAvailable()) {
             return false;
+        }
+
+        $cart = Cart::getCart();
+
+        if (! $cart) {
+            return false;
+        }
+
+        // Instantiate the Free Shipping carrier directly (Bagisto 2.3.x)
+        $freeShippingCarrier = new Free();
+
+        // Check if Free Shipping is available for this cart
+        if ($freeShippingCarrier->isAvailable()) {
+
+            $min = floatval(core()->getConfigData('sales.carriers.free.minimum_order_amount'));
+
+            // Hide flat rate if free shipping is allowed
+            if ($min > 0 && floatval($cart->sub_total) >= $min) {
+                return false;
+            }
         }
 
         return $this->getRate();
