@@ -2711,5 +2711,252 @@ return [
                 'validation' => 'max:200',
             ],
         ],
+    ],[
+        'key'    => 'sales.checkout.form_fields',
+        'name'   => 'Checkout Form Fields',
+        'info'   => 'Configure visibility and required rules for checkout billing & shipping fields.',
+        'sort'   => 4,
+        'fields' => [
+
+            /*
+            |--------------------------------------------------------------------------
+            | Global Options
+            |--------------------------------------------------------------------------
+            */
+
+            [
+                'name'    => 'default_country',
+                'title'   => 'Default Country',
+                'type'    => 'select',
+                'default' => 'PK',
+                'options' => [
+                    ['title' => 'Pakistan', 'value' => 'PK'],
+                    ['title' => 'Afghanistan', 'value' => 'AF'],
+                    ['title' => 'United Arab Emirates', 'value' => 'AE'],
+                    ['title' => 'Saudi Arabia', 'value' => 'SA'],
+                    ['title' => 'United States', 'value' => 'US'],
+                    ['title' => 'United Kingdom', 'value' => 'GB'],
+                    ['title' => 'Canada', 'value' => 'CA'],
+                    ['title' => 'Australia', 'value' => 'AU'],
+                ],
+            ],
+
+            [
+                'name'    => 'use_same_address',
+                'title'   => 'Use Same Address for Shipping (Default Checked) It will hide the checbox in checkout',
+                'type'    => 'boolean',
+                'default' => 1,
+            ],
+
+            /*
+            |--------------------------------------------------------------------------
+            | Company Name
+            |--------------------------------------------------------------------------
+            */
+
+            [
+                'name'    => 'company_name_show',
+                'title'   => 'Show Company Name',
+                'type'    => 'boolean',
+                'default' => 1,
+            ],
+            [
+                'name'    => 'company_name_required',
+                'title'   => 'Company Name Required',
+                'type'    => 'boolean',
+                'default' => 0,
+            ],
+
+            /*
+            |--------------------------------------------------------------------------
+            | First Name
+            |--------------------------------------------------------------------------
+            */
+
+            [
+                'name'    => 'first_name_show',
+                'title'   => 'Show First Name',
+                'type'    => 'boolean',
+                'default' => 1,
+            ],
+            [
+                'name'    => 'first_name_required',
+                'title'   => 'First Name Required',
+                'type'    => 'boolean',
+                'default' => 1,
+            ],
+
+            /*
+            |--------------------------------------------------------------------------
+            | Last Name
+            |--------------------------------------------------------------------------
+            */
+
+            [
+                'name'    => 'last_name_show',
+                'title'   => 'Show Last Name',
+                'type'    => 'boolean',
+                'default' => 1,
+            ],
+            [
+                'name'    => 'last_name_required',
+                'title'   => 'Last Name Required',
+                'type'    => 'boolean',
+                'default' => 1,
+            ],
+
+            /*
+            |--------------------------------------------------------------------------
+            | Email
+            |--------------------------------------------------------------------------
+            */
+
+            [
+                'name'    => 'email_show',
+                'title'   => 'Show Email',
+                'type'    => 'boolean',
+                'default' => 1,
+            ],
+            [
+                'name'    => 'email_required',
+                'title'   => 'Email Required',
+                'type'    => 'boolean',
+                'default' => 1,
+            ],
+
+            /*
+            |--------------------------------------------------------------------------
+            | VAT ID
+            |--------------------------------------------------------------------------
+            */
+
+            [
+                'name'    => 'vat_id_show',
+                'title'   => 'Show VAT ID',
+                'type'    => 'boolean',
+                'default' => 0,
+            ],
+            [
+                'name'    => 'vat_id_required',
+                'title'   => 'VAT ID Required',
+                'type'    => 'boolean',
+                'default' => 0,
+            ],
+
+            /*
+            |--------------------------------------------------------------------------
+            | Street Address
+            |--------------------------------------------------------------------------
+            */
+
+            [
+                'name'    => 'address_show',
+                'title'   => 'Show Street Address',
+                'type'    => 'boolean',
+                'default' => 1,
+            ],
+            [
+                'name'    => 'address_required',
+                'title'   => 'Street Address Required',
+                'type'    => 'boolean',
+                'default' => 1,
+            ],
+
+            /*
+            |--------------------------------------------------------------------------
+            | Country
+            |--------------------------------------------------------------------------
+            */
+
+            [
+                'name'    => 'country_show',
+                'title'   => 'Show Country',
+                'type'    => 'boolean',
+                'default' => 1,
+            ],
+            [
+                'name'    => 'country_required',
+                'title'   => 'Country Required',
+                'type'    => 'boolean',
+                'default' => 1,
+            ],
+
+            /*
+            |--------------------------------------------------------------------------
+            | State
+            |--------------------------------------------------------------------------
+            */
+
+            [
+                'name'    => 'state_show',
+                'title'   => 'Show State',
+                'type'    => 'boolean',
+                'default' => 1,
+            ],
+            [
+                'name'    => 'state_required',
+                'title'   => 'State Required',
+                'type'    => 'boolean',
+                'default' => 1,
+            ],
+
+            /*
+            |--------------------------------------------------------------------------
+            | City
+            |--------------------------------------------------------------------------
+            */
+
+            [
+                'name'    => 'city_show',
+                'title'   => 'Show City',
+                'type'    => 'boolean',
+                'default' => 1,
+            ],
+            [
+                'name'    => 'city_required',
+                'title'   => 'City Required',
+                'type'    => 'boolean',
+                'default' => 1,
+            ],
+
+            /*
+            |--------------------------------------------------------------------------
+            | Zip / Postcode
+            |--------------------------------------------------------------------------
+            */
+
+            [
+                'name'    => 'postcode_show',
+                'title'   => 'Show Zip / Postcode',
+                'type'    => 'boolean',
+                'default' => 0,
+            ],
+            [
+                'name'    => 'postcode_required',
+                'title'   => 'Zip / Postcode Required',
+                'type'    => 'boolean',
+                'default' => 0,
+            ],
+
+            /*
+            |--------------------------------------------------------------------------
+            | Telephone
+            |--------------------------------------------------------------------------
+            */
+
+            [
+                'name'    => 'phone_show',
+                'title'   => 'Show Telephone',
+                'type'    => 'boolean',
+                'default' => 1,
+            ],
+            [
+                'name'    => 'phone_required',
+                'title'   => 'Telephone Required',
+                'type'    => 'boolean',
+                'default' => 1,
+            ],
+        ],
     ],
+
 ];

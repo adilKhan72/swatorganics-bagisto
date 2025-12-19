@@ -45,25 +45,84 @@ class CartAddressRequest extends FormRequest
      */
     private function mergeAddressRules(string $addressType): void
     {
-        $this->mergeWithRules([
-            "{$addressType}.company_name" => ['nullable'],
-            "{$addressType}.first_name"   => ['required'],
-            "{$addressType}.last_name"    => ['required'],
-            "{$addressType}.email"        => ['required'],
-            "{$addressType}.address"      => ['required', 'array', 'min:1'],
-            "{$addressType}.city"         => ['required'],
-            "{$addressType}.country"      => core()->isCountryRequired() ? ['required'] : ['nullable'],
-            "{$addressType}.state"        => core()->isStateRequired() ? ['required'] : ['nullable'],
-            "{$addressType}.postcode"     => core()->isPostCodeRequired() ? ['required', new PostCode] : [new PostCode],
-            "{$addressType}.phone"        => ['required', new PhoneNumber],
-        ]);
+        $rules = [];
 
-        if ($addressType == 'billing') {
-            $this->mergeWithRules([
-                "{$addressType}.vat_id" => [(new VatIdRule)->setCountry($this->input('billing.country'))],
-            ]);
+        $fields = [
+            'company_name',
+            'first_name',
+            'last_name',
+            'email',
+            'address',
+            'city',
+            'country',
+            'state',
+            'postcode',
+            'phone',
+        ];
+
+        foreach ($fields as $field) {
+
+            // 1️⃣ If field is hidden → skip completely
+            if (! core()->isCheckoutFieldVisible($field)) {
+                continue;
+            }
+
+            $isRequired = core()->isCheckoutFieldRequired($field);
+
+            switch ($field) {
+                case 'email':
+                    $rules["{$addressType}.email"] = $isRequired
+                        ? ['required', 'email']
+                        : ['nullable', 'email'];
+                    break;
+
+                case 'address':
+                    $rules["{$addressType}.address"] = $isRequired
+                        ? ['required', 'array', 'min:1']
+                        : ['nullable', 'array'];
+                    break;
+
+                case 'postcode':
+                    $rules["{$addressType}.postcode"] = $isRequired
+                        ? ['required', new PostCode]
+                        : [new PostCode];
+                    break;
+
+                case 'phone':
+                    $rules["{$addressType}.phone"] = $isRequired
+                        ? ['required', new PhoneNumber]
+                        : [new PhoneNumber];
+                    break;
+
+                case 'country':
+                    $rules["{$addressType}.country"] = $isRequired
+                        ? ['required']
+                        : ['nullable'];
+                    break;
+
+                case 'state':
+                    $rules["{$addressType}.state"] = $isRequired
+                        ? ['required']
+                        : ['nullable'];
+                    break;
+
+                default:
+                    $rules["{$addressType}.{$field}"] = $isRequired
+                        ? ['required']
+                        : ['nullable'];
+            }
         }
+
+        // VAT only applies to billing
+        if ($addressType === 'billing' && core()->isCheckoutFieldVisible('vat_id')) {
+            $rules["billing.vat_id"] = core()->isCheckoutFieldRequired('vat_id')
+                ? ['required', (new VatIdRule)->setCountry($this->input('billing.country'))]
+                : [(new VatIdRule)->setCountry($this->input('billing.country'))];
+        }
+
+        $this->mergeWithRules($rules);
     }
+
 
     /**
      * Merge additional rules.

@@ -3,6 +3,7 @@
 <!-- Guest Address Vue Component -->
 <v-checkout-address-guest
     :cart="cart"
+    :use-same-address-default="{{ core()->getConfigData('sales.checkout.form_fields.use_same_address') ? 'true' : 'false' }}"
     @processing="stepForward"
     @processed="stepProcessed"
 ></v-checkout-address-guest>
@@ -42,7 +43,7 @@
                     <!-- Use for Shipping Checkbox -->
                     <x-shop::form.control-group
                         class="!mb-0 flex items-center gap-2.5"
-                        v-if="cart.have_stockable_items"
+                        v-if="cart.have_stockable_items && !useSameAddressDefault"
                     >
                         <x-shop::form.control-group.control
                             type="checkbox"
@@ -107,21 +108,31 @@
         app.component('v-checkout-address-guest', {
             template: '#v-checkout-address-guest-template',
 
-            props: ['cart'],
+            props: {
+                cart: Object,
+                useSameAddressDefault: {
+                    type: Boolean,
+                    default: true,
+                },
+            },
 
             emits: ['processing', 'processed'],
 
             data() {
                 return {
-                    useBillingAddressForShipping: true,
-
+                    useBillingAddressForShipping: this.useSameAddressDefault,
                     isStoring: false,
                 }
             },
 
             created() {
-                if (this.cart.billing_address) {
-                    this.useBillingAddressForShipping = this.cart.billing_address.use_for_shipping;
+                if (this.useSameAddressDefault === true) {
+                    this.useBillingAddressForShipping = true;
+                    return;
+                }
+
+                if (this.cart?.billing_address) {
+                    this.useBillingAddressForShipping = !!this.cart.billing_address.use_for_shipping;
                 }
             },
 

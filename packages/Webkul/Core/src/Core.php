@@ -754,6 +754,26 @@ class Core
         return (bool) $this->getConfigData('customer.address.requirements.country');
     }
 
+     /**
+     * Is Checkout Field required.
+     *
+     * @return bool
+     */
+    public function isCheckoutFieldRequired($field)
+    {
+        return (bool) $this->getConfigData("sales.checkout.form_fields.{$field}_required");
+    }
+
+    /**
+     * Is Checkout Field Visible.
+     *
+     * @return bool
+     */
+    public function isCheckoutFieldVisible($field)
+    {
+        return (bool) $this->getConfigData("sales.checkout.form_fields.{$field}_show");
+}
+
     /**
      * Is state required.
      *

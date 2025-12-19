@@ -13,8 +13,12 @@
             </x-shop::form.control-group>
 
             <!-- Company Name -->
-            <x-shop::form.control-group>
-                <x-shop::form.control-group.label>
+            <x-shop::form.control-group
+                v-if="isVisible('company_name')"
+            >
+                <x-shop::form.control-group.label
+                    class="{{ core()->isCheckoutFieldRequired('company_name') ? 'required !mt-0' : '' }}"
+                >
                     @lang('shop::app.checkout.onepage.address.company-name')
                 </x-shop::form.control-group.label>
 
@@ -22,6 +26,7 @@
                     type="text"
                     ::name="controlName + '.company_name'"
                     ::value="address.company_name"
+                    rules="{{ core()->isCheckoutFieldRequired('company_name') ? 'required' : '' }}"
                     :placeholder="trans('shop::app.checkout.onepage.address.company-name')"
                 />
             </x-shop::form.control-group>
@@ -30,8 +35,12 @@
 
             <!-- First Name -->
             <div class="grid grid-cols-2 gap-x-5 max-md:grid-cols-1">
-                <x-shop::form.control-group>
-                    <x-shop::form.control-group.label class="required !mt-0">
+                <x-shop::form.control-group
+                    v-if="isVisible('first_name')"
+                >
+                    <x-shop::form.control-group.label
+                        class="{{ core()->isCheckoutFieldRequired('first_name') ? 'required !mt-0' : '' }}"
+                    >
                         @lang('shop::app.checkout.onepage.address.first-name')
                     </x-shop::form.control-group.label>
 
@@ -39,7 +48,7 @@
                         type="text"
                         ::name="controlName + '.first_name'"
                         ::value="address.first_name"
-                        rules="required"
+                        rules="{{ core()->isCheckoutFieldRequired('first_name') ? 'required' : '' }}"
                         :label="trans('shop::app.checkout.onepage.address.first-name')"
                         :placeholder="trans('shop::app.checkout.onepage.address.first-name')"
                     />
@@ -50,8 +59,12 @@
                 {!! view_render_event('bagisto.shop.checkout.onepage.address.form.first_name.after') !!}
 
                 <!-- Last Name -->
-                <x-shop::form.control-group>
-                    <x-shop::form.control-group.label class="required !mt-0">
+                <x-shop::form.control-group
+                    v-if="isVisible('last_name')"
+                >
+                    <x-shop::form.control-group.label
+                        class="{{ core()->isCheckoutFieldRequired('last_name') ? 'required !mt-0' : '' }}"
+                    >
                         @lang('shop::app.checkout.onepage.address.last-name')
                     </x-shop::form.control-group.label>
 
@@ -59,7 +72,7 @@
                         type="text"
                         ::name="controlName + '.last_name'"
                         ::value="address.last_name"
-                        rules="required"
+                        rules="{{ core()->isCheckoutFieldRequired('last_name') ? 'required' : '' }}"
                         :label="trans('shop::app.checkout.onepage.address.last-name')"
                         :placeholder="trans('shop::app.checkout.onepage.address.last-name')"
                     />
@@ -71,8 +84,12 @@
             </div>
 
             <!-- Email -->
-            <x-shop::form.control-group>
-                <x-shop::form.control-group.label class="required !mt-0">
+            <x-shop::form.control-group
+                v-if="isVisible('email')"
+            >
+                <x-shop::form.control-group.label
+                    class="{{ core()->isCheckoutFieldRequired('email') ? 'required !mt-0' : '' }}"
+                >
                     @lang('shop::app.checkout.onepage.address.email')
                 </x-shop::form.control-group.label>
 
@@ -80,7 +97,7 @@
                     type="email"
                     ::name="controlName + '.email'"
                     ::value="address.email"
-                    rules="required|email"
+                    rules="{{ core()->isCheckoutFieldRequired('email') ? 'required' : '' }}|email"
                     :label="trans('shop::app.checkout.onepage.address.email')"
                     placeholder="email@example.com"
                 />
@@ -92,8 +109,12 @@
 
             <!-- Vat ID -->
             <template v-if="controlName=='billing'">
-                <x-shop::form.control-group>
-                    <x-shop::form.control-group.label>
+                <x-shop::form.control-group
+                    v-if="isVisible('vat_id')"
+                >
+                    <x-shop::form.control-group.label
+                        class="{{ core()->isCheckoutFieldRequired('vat_id') ? 'required !mt-0' : '' }}"
+                    >
                         @lang('shop::app.checkout.onepage.address.vat-id')
                     </x-shop::form.control-group.label>
 
@@ -101,6 +122,7 @@
                         type="text"
                         ::name="controlName + '.vat_id'"
                         ::value="address.vat_id"
+                        rules="{{ core()->isCheckoutFieldRequired('vat_id') ? 'required' : '' }}"
                         :label="trans('shop::app.checkout.onepage.address.vat-id')"
                         :placeholder="trans('shop::app.checkout.onepage.address.vat-id')"
                     />
@@ -112,8 +134,12 @@
             </template>
 
             <!-- Street Address -->
-            <x-shop::form.control-group>
-                <x-shop::form.control-group.label class="required !mt-0">
+            <x-shop::form.control-group
+                v-if="isVisible('address')"
+            >
+                <x-shop::form.control-group.label
+                    class="{{ core()->isCheckoutFieldRequired('address') ? 'required !mt-0' : '' }}"
+                >
                     @lang('shop::app.checkout.onepage.address.street-address')
                 </x-shop::form.control-group.label>
 
@@ -121,7 +147,7 @@
                     type="text"
                     ::name="controlName + '.address.[0]'"
                     ::value="address.address[0]"
-                    rules="required|address"
+                    rules="{{ core()->isCheckoutFieldRequired('address') ? 'required' : '' }}|address"
                     :label="trans('shop::app.checkout.onepage.address.street-address')"
                     :placeholder="trans('shop::app.checkout.onepage.address.street-address')"
                 />
@@ -136,7 +162,7 @@
                         <x-shop::form.control-group.control
                             type="text"
                             ::name="controlName + '.address.[{{ $i }}]'"
-                            rules="address"
+                            rules="{{ core()->isCheckoutFieldRequired('address') ? 'required' : '' }}"
                             :label="trans('shop::app.checkout.onepage.address.street-address')"
                             :placeholder="trans('shop::app.checkout.onepage.address.street-address')"
                         />
@@ -153,8 +179,12 @@
 
             <div class="grid grid-cols-2 gap-x-5 max-md:grid-cols-1">
                 <!-- Country -->
-                <x-shop::form.control-group class="!mb-4">
-                    <x-shop::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }} !mt-0">
+                <x-shop::form.control-group class="!mb-4"
+                    v-if="isVisible('country')"
+                >
+                    <x-shop::form.control-group.label
+                        class="{{ core()->isCheckoutFieldRequired('country') ? 'required !mt-0' : '' }}"
+                    >
                         @lang('shop::app.checkout.onepage.address.country')
                     </x-shop::form.control-group.label>
 
@@ -163,7 +193,7 @@
                         ::name="controlName + '.country'"
                         ::value="address.country"
                         v-model="selectedCountry"
-                        rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
+                        rules="{{ core()->isCheckoutFieldRequired('country') ? 'required' : '' }}"
                         :label="trans('shop::app.checkout.onepage.address.country')"
                         :placeholder="trans('shop::app.checkout.onepage.address.country')"
                     >
@@ -185,8 +215,12 @@
                 {!! view_render_event('bagisto.shop.checkout.onepage.address.form.country.after') !!}
 
                 <!-- State -->
-                <x-shop::form.control-group>
-                    <x-shop::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }} !mt-0">
+                <x-shop::form.control-group
+                    v-if="isVisible('state')"
+                >
+                    <x-shop::form.control-group.label
+                        class="{{ core()->isCheckoutFieldRequired('state') ? 'required !mt-0' : '' }}"
+                    >
                         @lang('shop::app.checkout.onepage.address.state')
                     </x-shop::form.control-group.label>
 
@@ -195,8 +229,8 @@
                             <x-shop::form.control-group.control
                                 type="select"
                                 ::name="controlName + '.state'"
-                                rules="{{ core()->isStateRequired() ? 'required' : '' }}"
                                 ::value="address.state"
+                                rules="{{ core()->isCheckoutFieldRequired('state') ? 'required' : '' }}"
                                 :label="trans('shop::app.checkout.onepage.address.state')"
                                 :placeholder="trans('shop::app.checkout.onepage.address.state')"
                             >
@@ -218,7 +252,7 @@
                                 type="text"
                                 ::name="controlName + '.state'"
                                 ::value="address.state"
-                                rules="{{ core()->isStateRequired() ? 'required' : '' }}"
+                                rules="{{ core()->isCheckoutFieldRequired('state') ? 'required' : '' }}"
                                 :label="trans('shop::app.checkout.onepage.address.state')"
                                 :placeholder="trans('shop::app.checkout.onepage.address.state')"
                             />
@@ -233,8 +267,12 @@
 
             <div class="grid grid-cols-2 gap-x-5 max-md:grid-cols-1">
                 <!-- City -->
-                <x-shop::form.control-group>
-                    <x-shop::form.control-group.label class="required !mt-0">
+                <x-shop::form.control-group
+                    v-if="isVisible('city')"
+                >
+                    <x-shop::form.control-group.label
+                        class="{{ core()->isCheckoutFieldRequired('city') ? 'required !mt-0' : '' }}"
+                    >
                         @lang('shop::app.checkout.onepage.address.city')
                     </x-shop::form.control-group.label>
 
@@ -242,7 +280,7 @@
                         type="text"
                         ::name="controlName + '.city'"
                         ::value="address.city"
-                        rules="required"
+                        rules="{{ core()->isCheckoutFieldRequired('city') ? 'required' : '' }}"
                         :label="trans('shop::app.checkout.onepage.address.city')"
                         :placeholder="trans('shop::app.checkout.onepage.address.city')"
                     />
@@ -253,8 +291,12 @@
                 {!! view_render_event('bagisto.shop.checkout.onepage.address.form.city.after') !!}
 
                 <!-- Postcode -->
-                <x-shop::form.control-group>
-                    <x-shop::form.control-group.label class="{{ core()->isPostCodeRequired() ? 'required' : '' }} !mt-0">
+                <x-shop::form.control-group
+                    v-if="isVisible('postcode')"
+                >
+                    <x-shop::form.control-group.label
+                        class="{{ core()->isCheckoutFieldRequired('postcode') ? 'required !mt-0' : '' }}"
+                    >
                         @lang('shop::app.checkout.onepage.address.postcode')
                     </x-shop::form.control-group.label>
 
@@ -262,7 +304,7 @@
                         type="text"
                         ::name="controlName + '.postcode'"
                         ::value="address.postcode"
-                        rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}|postcode"
+                        rules="{{ core()->isCheckoutFieldRequired('postcode') ? 'required' : '' }}|postcode"
                         :label="trans('shop::app.checkout.onepage.address.postcode')"
                         :placeholder="trans('shop::app.checkout.onepage.address.postcode')"
                     />
@@ -274,8 +316,12 @@
             </div>
 
             <!-- Phone Number -->
-            <x-shop::form.control-group>
-                <x-shop::form.control-group.label class="required !mt-0">
+            <x-shop::form.control-group
+                v-if="isVisible('phone')"
+            >
+                <x-shop::form.control-group.label
+                    class="{{ core()->isCheckoutFieldRequired('phone') ? 'required !mt-0' : '' }}"
+                >
                     @lang('shop::app.checkout.onepage.address.telephone')
                 </x-shop::form.control-group.label>
 
@@ -283,7 +329,7 @@
                     type="text"
                     ::name="controlName + '.phone'"
                     ::value="address.phone"
-                    rules="required|phone"
+                    rules="{{ core()->isCheckoutFieldRequired('phone') ? 'required' : '' }}|phone"
                     :label="trans('shop::app.checkout.onepage.address.telephone')"
                     :placeholder="trans('shop::app.checkout.onepage.address.telephone')"
                 />
@@ -293,6 +339,74 @@
 
             {!! view_render_event('bagisto.shop.checkout.onepage.address.form.phone.after') !!}
         </div>
+    </script>
+    @php
+        $checkoutFormConfig = [
+            'default_country' => core()->getConfigData('sales.checkout.form_fields.default_country') ?: 'PK',
+
+            'use_same_address' => core()->getConfigData('sales.checkout.form_fields.use_for_shipping_default') ? 1 : 0,
+
+            'fields' => [
+                'company_name' => [
+                    'show'     => (bool) core()->getConfigData('sales.checkout.form_fields.company_name_show'),
+                    'required' => (bool) core()->getConfigData('sales.checkout.form_fields.company_name_required'),
+                ],
+
+                'first_name' => [
+                    'show'     => (bool) core()->getConfigData('sales.checkout.form_fields.first_name_show'),
+                    'required' => (bool) core()->getConfigData('sales.checkout.form_fields.first_name_required'),
+                ],
+
+                'last_name' => [
+                    'show'     => (bool) core()->getConfigData('sales.checkout.form_fields.last_name_show'),
+                    'required' => (bool) core()->getConfigData('sales.checkout.form_fields.last_name_required'),
+                ],
+
+                'email' => [
+                    'show'     => (bool) core()->getConfigData('sales.checkout.form_fields.email_show'),
+                    'required' => (bool) core()->getConfigData('sales.checkout.form_fields.email_required'),
+                ],
+
+                'vat_id' => [
+                    'show'     => (bool) core()->getConfigData('sales.checkout.form_fields.vat_id_show'),
+                    'required' => (bool) core()->getConfigData('sales.checkout.form_fields.vat_id_required'),
+                ],
+
+                'address' => [
+                    'show'     => (bool) core()->getConfigData('sales.checkout.form_fields.address_show'),
+                    'required' => (bool) core()->getConfigData('sales.checkout.form_fields.address_required'),
+                ],
+
+                'country' => [
+                    'show'     => (bool) core()->getConfigData('sales.checkout.form_fields.country_show'),
+                    'required' => (bool) core()->getConfigData('sales.checkout.form_fields.country_required'),
+                ],
+
+                'state' => [
+                    'show'     => (bool) core()->getConfigData('sales.checkout.form_fields.state_show'),
+                    'required' => (bool) core()->getConfigData('sales.checkout.form_fields.state_required'),
+                ],
+
+                'city' => [
+                    'show'     => (bool) core()->getConfigData('sales.checkout.form_fields.city_show'),
+                    'required' => (bool) core()->getConfigData('sales.checkout.form_fields.city_required'),
+                ],
+
+                'postcode' => [
+                    'show'     => (bool) core()->getConfigData('sales.checkout.form_fields.postcode_show'),
+                    'required' => (bool) core()->getConfigData('sales.checkout.form_fields.postcode_required'),
+                ],
+
+                'phone' => [
+                    'show'     => (bool) core()->getConfigData('sales.checkout.form_fields.phone_show'),
+                    'required' => (bool) core()->getConfigData('sales.checkout.form_fields.phone_required'),
+                ],
+            ],
+        ];
+    @endphp
+
+    <script>
+        window.checkoutFormConfig = @json($checkoutFormConfig);
     </script>
 
     <script type="module">
@@ -325,12 +439,13 @@
             },
 
             data() {
+                const config = window.checkoutFormConfig || {};
+
                 return {
-                    selectedCountry: this.address.country,
-
+                    selectedCountry: this.address.country || config.default_country || 'PK',
                     countries: [],
-
                     states: null,
+                    fieldConfig: config.fields || {},   // 👈 SAFE DEFAULT
                 }
             },
 
@@ -361,6 +476,15 @@
                             this.states = response.data.data;
                         })
                         .catch(() => {});
+                },
+                
+                isVisible(field) {
+                    return this.fieldConfig?.[field]?.show === true;
+                },
+
+                isRequired(field) {
+                    return this.isVisible(field)
+                        && this.fieldConfig?.[field]?.required === true;
                 },
             }
         });
