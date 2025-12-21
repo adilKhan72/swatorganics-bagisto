@@ -48,9 +48,10 @@
                                 <input 
                                     type="radio" 
                                     name="payment[method]" 
-                                    :value="payment.payment"
+                                    :value="payment.method"
                                     :id="payment.method"
                                     class="peer hidden"
+                                    v-model="selectedPaymentMethod"
                                     @change="store(payment)"
                                 >
     
@@ -125,33 +126,71 @@
 
             emits: ['processing', 'processed'],
 
+            data() {
+                return {
+                    selectedPaymentMethod: null,
+                };
+            },
+
+            mounted() {
+                if (window.checkoutSettings?.autoSelectSingleMethods) {
+                    this.autoSelectIfSingle();
+                };
+            },
+
+            watch: {
+                methods: {
+                    deep: true,
+                    handler() {
+                        this.autoSelectIfSingle();
+                    }
+                }
+            },
+
             methods: {
+                autoSelectIfSingle() {
+                    if (!window.checkoutSettings?.autoSelectSingleMethods) return;
+                    
+                    if (!this.methods) return;
+
+                    const payments = Object.values(this.methods);
+
+                    if (payments.length !== 1) return;
+
+                    const method = payments[0];
+
+                    this.selectedPaymentMethod = method.method; // ✅ radio checked
+                    this.store(method);                          // ✅ API call
+                },
+
                 store(selectedMethod) {
                     this.$emit('processing', 'review');
 
-                    this.$axios.post("{{ route('shop.checkout.onepage.payment_methods.store') }}", {
-                            payment: selectedMethod
-                        })
-                        .then(response => {
-                            this.$emit('processed', response.data.cart);
+                    this.$axios.post(
+                        "{{ route('shop.checkout.onepage.payment_methods.store') }}",
+                        { payment: selectedMethod }
+                    )
+                    .then(response => {
+                        this.$emit('processed', response.data.cart);
 
-                            // Used in mobile view. 
-                            if (window.innerWidth <= 768) {
-                                window.scrollTo({
-                                    top: document.body.scrollHeight,
-                                    behavior: 'smooth'
-                                });
-                            }
-                        })
-                        .catch(error => {
-                            this.$emit('processing', 'payment');
+                        if (window.innerWidth <= 768) {
+                            window.scrollTo({
+                                top: document.body.scrollHeight,
+                                behavior: 'smooth'
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        this.$emit('processing', 'payment');
 
-                            if (error.response.data.redirect_url) {
-                                window.location.href = error.response.data.redirect_url;
-                            }
-                        });
+                        if (error.response?.data?.redirect_url) {
+                            window.location.href = error.response.data.redirect_url;
+                        }
+                    });
                 },
             },
         });
+
     </script>
+
 @endPushOnce

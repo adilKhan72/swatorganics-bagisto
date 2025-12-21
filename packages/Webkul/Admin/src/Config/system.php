@@ -2958,5 +2958,18 @@ return [
             ],
         ],
     ],
+    [
+        'name'   => 'single_methods',
+        'key'    => 'sales.checkout.single_methods',
+        'info'   => 'Automatically selects shipping and payment methods if only one option is available.',
+        'fields' => [
+            [
+                'name'    => 'auto_select',
+                'title'   => 'Auto Select Shipping & Payment When Single Option',
+                'type'    => 'boolean',
+                'default' => 0,
+            ],
+        ],
+    ],
 
 ];

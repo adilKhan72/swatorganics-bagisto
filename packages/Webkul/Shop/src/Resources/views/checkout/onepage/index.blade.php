@@ -133,7 +133,11 @@
                 </div>
             </template>
         </script>
-
+        <script>
+            window.checkoutSettings = {
+                autoSelectSingleMethods: {{ core()->getConfigData('sales.checkout.single_methods.auto_select') ? 'true' : 'false' }}
+            };
+        </script>
         <script type="module">
             app.component('v-checkout', {
                 template: '#v-checkout-template',

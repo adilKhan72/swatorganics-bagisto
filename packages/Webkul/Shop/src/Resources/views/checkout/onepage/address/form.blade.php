@@ -34,7 +34,7 @@
             {!! view_render_event('bagisto.shop.checkout.onepage.address.form.company_name.after') !!}
 
             <!-- First Name -->
-            <div class="grid grid-cols-2 gap-x-5 max-md:grid-cols-1">
+            <div class="grid {{ core()->isCheckoutFieldVisible('first_name') && core()->isCheckoutFieldVisible('last_name') ? 'grid-cols-2' : 'grid-cols-1' }} gap-x-5 max-md:grid-cols-1">
                 <x-shop::form.control-group
                     v-if="isVisible('first_name')"
                 >
@@ -177,7 +177,7 @@
 
             {!! view_render_event('bagisto.shop.checkout.onepage.address.form.address.after') !!}
 
-            <div class="grid grid-cols-2 gap-x-5 max-md:grid-cols-1">
+            <div class="grid {{ core()->isCheckoutFieldVisible('country') && core()->isCheckoutFieldVisible('state') ? 'grid-cols-2' : 'grid-cols-1' }}  gap-x-5 max-md:grid-cols-1">
                 <!-- Country -->
                 <x-shop::form.control-group class="!mb-4"
                     v-if="isVisible('country')"
@@ -265,7 +265,7 @@
                 {!! view_render_event('bagisto.shop.checkout.onepage.address.form.state.after') !!}
             </div>
 
-            <div class="grid grid-cols-2 gap-x-5 max-md:grid-cols-1">
+            <div class="grid {{ core()->isCheckoutFieldVisible('city') && core()->isCheckoutFieldVisible('postcode') ? 'grid-cols-2' : 'grid-cols-1' }} gap-x-5 max-md:grid-cols-1">
                 <!-- City -->
                 <x-shop::form.control-group
                     v-if="isVisible('city')"

@@ -50,6 +50,7 @@
                                         :id="rate.method"
                                         :value="rate.method"
                                         class="peer hidden"
+                                        v-model="selectedShippingMethod"
                                         @change="store(rate.method)"
                                     >
 
@@ -100,29 +101,71 @@
 
             emits: ['processing', 'processed'],
 
+            data() {
+                return {
+                    selectedShippingMethod: null,
+                };
+            },
+
+            mounted() {
+                if (window.checkoutSettings?.autoSelectSingleMethods) {
+                    this.autoSelectIfSingle();
+                }
+            },
+
+            watch: {
+                methods: {
+                    deep: true,
+                    handler() {
+                        this.autoSelectIfSingle();
+                    }
+                }
+            },
+
             methods: {
+                autoSelectIfSingle() {
+                    if (!window.checkoutSettings?.autoSelectSingleMethods) return;
+                    if (!this.methods) return;
+
+                    const carriers = Object.values(this.methods);
+
+                    if (
+                        carriers.length === 1 &&
+                        carriers[0].rates &&
+                        carriers[0].rates.length === 1
+                    ) {
+                        const rate = carriers[0].rates[0];
+
+                        this.selectedShippingMethod = rate.method; // ✅ UI selection
+                        this.store(rate.method);
+                    }
+                },
+
                 store(selectedMethod) {
                     this.$emit('processing', 'payment');
 
-                    this.$axios.post("{{ route('shop.checkout.onepage.shipping_methods.store') }}", {    
-                            shipping_method: selectedMethod,
-                        })
-                        .then(response => {
-                            if (response.data.redirect_url) {
-                                window.location.href = response.data.redirect_url;
-                            } else {
-                                this.$emit('processed', response.data.payment_methods);
-                            }
-                        })
-                        .catch(error => {
-                            this.$emit('processing', 'shipping');
+                    this.$axios.post(
+                        "{{ route('shop.checkout.onepage.shipping_methods.store') }}",
+                        { shipping_method: selectedMethod }
+                    )
+                    .then(response => {
+                        if (response.data.redirect_url) {
+                            window.location.href = response.data.redirect_url;
+                        } else {
+                            this.$emit('processed', response.data.payment_methods);
+                        }
+                    })
+                    .catch(error => {
+                        this.$emit('processing', 'shipping');
 
-                            if (error.response.data.redirect_url) {
-                                window.location.href = error.response.data.redirect_url;
-                            }
-                        });
+                        if (error.response?.data?.redirect_url) {
+                            window.location.href = error.response.data.redirect_url;
+                        }
+                    });
                 },
             },
         });
+
     </script>
+
 @endPushOnce
