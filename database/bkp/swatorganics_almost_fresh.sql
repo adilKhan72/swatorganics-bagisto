@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 21, 2025 at 06:36 PM
+-- Generation Time: Dec 21, 2025 at 07:02 PM
 -- Server version: 8.0.40
 -- PHP Version: 8.2.26
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `swatorganics_new`
+-- Database: `swatorganics`
 --
 
 -- --------------------------------------------------------
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `addresses` (
   KEY `addresses_cart_id_foreign` (`cart_id`),
   KEY `addresses_order_id_foreign` (`order_id`),
   KEY `addresses_parent_address_id_foreign` (`parent_address_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `addresses`
@@ -96,7 +96,13 @@ INSERT INTO `addresses` (`id`, `address_type`, `parent_address_id`, `customer_id
 (30, 'cart_billing', NULL, NULL, 13, NULL, 'asdf', 'asdf', NULL, NULL, 'aadsfasdf', 'adfdsf', NULL, 'PK', NULL, 'asdf@gasd.asd', '03443444141', NULL, 0, 1, NULL, '2025-12-21 18:37:52', '2025-12-21 18:37:52'),
 (31, 'cart_shipping', NULL, NULL, 13, NULL, 'asdf', 'asdf', NULL, NULL, 'aadsfasdf', 'adfdsf', NULL, 'PK', NULL, 'asdf@gasd.asd', '03443444141', NULL, 0, 0, NULL, '2025-12-21 18:37:52', '2025-12-21 18:37:52'),
 (32, 'order_shipping', NULL, NULL, NULL, 7, 'asdf', 'asdf', NULL, NULL, 'aadsfasdf', 'adfdsf', NULL, 'PK', NULL, 'asdf@gasd.asd', '03443444141', NULL, 0, 0, NULL, '2025-12-21 19:03:19', '2025-12-21 19:03:19'),
-(33, 'order_billing', NULL, NULL, NULL, 7, 'asdf', 'asdf', NULL, NULL, 'aadsfasdf', 'adfdsf', NULL, 'PK', NULL, 'asdf@gasd.asd', '03443444141', NULL, 0, 0, NULL, '2025-12-21 19:03:19', '2025-12-21 19:03:19');
+(33, 'order_billing', NULL, NULL, NULL, 7, 'asdf', 'asdf', NULL, NULL, 'aadsfasdf', 'adfdsf', NULL, 'PK', NULL, 'asdf@gasd.asd', '03443444141', NULL, 0, 0, NULL, '2025-12-21 19:03:19', '2025-12-21 19:03:19'),
+(34, 'cart_billing', NULL, NULL, 14, NULL, 'asdf', '', NULL, NULL, 'adsf asdfasd f', 'adsf', NULL, 'PK', NULL, 'asdf@gasd.asd', '03443444141', NULL, 0, 1, NULL, '2025-12-21 19:11:39', '2025-12-21 19:11:39'),
+(35, 'cart_shipping', NULL, NULL, 14, NULL, 'asdf', '', NULL, NULL, 'adsf asdfasd f', 'adsf', NULL, 'PK', NULL, 'asdf@gasd.asd', '03443444141', NULL, 0, 0, NULL, '2025-12-21 19:11:39', '2025-12-21 19:11:39'),
+(36, 'order_shipping', NULL, NULL, NULL, 8, 'asdf', '', NULL, NULL, 'adsf asdfasd f', 'adsf', NULL, 'PK', NULL, 'asdf@gasd.asd', '03443444141', NULL, 0, 0, NULL, '2025-12-21 19:12:16', '2025-12-21 19:12:16'),
+(37, 'order_billing', NULL, NULL, NULL, 8, 'asdf', '', NULL, NULL, 'adsf asdfasd f', 'adsf', NULL, 'PK', NULL, 'asdf@gasd.asd', '03443444141', NULL, 0, 0, NULL, '2025-12-21 19:12:16', '2025-12-21 19:12:16'),
+(38, 'order_shipping', NULL, NULL, NULL, 9, 'adil', 'khan', NULL, 'adil khan', 'mmy accound address', 'Mingora', 'Swat', 'PK', '19120', 'adilkhan11228@gmail.com', '03443444141', NULL, 0, 0, NULL, '2025-12-21 19:31:22', '2025-12-21 19:31:22'),
+(39, 'order_billing', NULL, NULL, NULL, 9, 'adil', 'khan', NULL, 'adil khan', 'mmy accound address', 'Mingora', 'Swat', 'PK', '19120', 'adilkhan11228@gmail.com', '03443444141', '', 0, 0, NULL, '2025-12-21 19:31:22', '2025-12-21 19:31:22');
 
 -- --------------------------------------------------------
 
@@ -649,12 +655,12 @@ INSERT INTO `cart` (`id`, `customer_email`, `customer_first_name`, `customer_las
 (4, 'asdf@gasd.asd', 'asdf', 'asdf', 'flatrate_flatrate', NULL, 0, 1, 1.0000, NULL, 'USD', 'USD', 'USD', 'PKR', 3000.0000, 3000.0000, 2800.0000, 2800.0000, 0.0000, 0.0000, 0.0000, 0.0000, 200.0000, 200.0000, 200.0000, 200.0000, 2800.0000, 2800.0000, NULL, 1, 1, NULL, NULL, 1, '2025-12-14 12:50:32', '2025-12-14 14:17:29'),
 (5, 'asdf@gasd.asd', 'asdf', 'asdf', 'free_free', NULL, 0, 1, 2.0000, NULL, 'USD', 'USD', 'USD', 'PKR', 5600.0000, 5600.0000, 5600.0000, 5600.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 5600.0000, 5600.0000, NULL, 1, 1, NULL, NULL, 1, '2025-12-14 12:50:40', '2025-12-14 14:17:25'),
 (6, NULL, NULL, NULL, NULL, NULL, 0, 1, 4.0000, NULL, 'USD', 'USD', 'USD', 'USD', 11200.0000, 11200.0000, 11200.0000, 11200.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 11200.0000, 11200.0000, NULL, 1, 1, NULL, NULL, 1, '2025-12-14 12:51:03', '2025-12-14 12:52:19'),
-(7, 'adilkhan11228@gmail.com', 'Adil', 'khan', 'flatrate_flatrate', NULL, 0, 1, 1.0000, NULL, 'USD', 'USD', 'PKR', 'PKR', 3000.0000, 3000.0000, 2800.0000, 2800.0000, 0.0000, 0.0000, 0.0000, 0.0000, 200.0000, 200.0000, 200.0000, 200.0000, 2800.0000, 2800.0000, NULL, 0, 1, NULL, 1, 1, '2025-12-14 14:16:38', '2025-12-14 19:16:14'),
+(7, 'adilkhan11228@gmail.com', 'Adil', 'khan', 'flatrate_flatrate', NULL, 0, 1, 1.0000, NULL, 'USD', 'USD', 'PKR', 'PKR', 3000.0000, 3000.0000, 2800.0000, 2800.0000, 0.0000, 0.0000, 0.0000, 0.0000, 200.0000, 200.0000, 200.0000, 200.0000, 2800.0000, 2800.0000, NULL, 0, 0, NULL, 1, 1, '2025-12-14 14:16:38', '2025-12-21 19:31:28'),
 (9, NULL, NULL, NULL, NULL, NULL, 0, 1, 1.0000, NULL, 'USD', 'USD', 'PKR', 'PKR', 2800.0000, 2800.0000, 2800.0000, 2800.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, NULL, 1, 1, NULL, NULL, 1, '2025-12-18 18:26:47', '2025-12-18 18:26:50'),
 (10, '', 'asdf', '', 'flatrate_flatrate', NULL, 0, 1, 1.0000, NULL, 'USD', 'USD', 'PKR', 'PKR', 3000.0000, 3000.0000, 2800.0000, 2800.0000, 0.0000, 0.0000, 0.0000, 0.0000, 200.0000, 200.0000, 200.0000, 200.0000, 2800.0000, 2800.0000, NULL, 1, 1, NULL, NULL, 1, '2025-12-19 12:47:01', '2025-12-19 14:37:33'),
 (13, 'asdf@gasd.asd', 'asdf', 'asdf', 'flatrate_flatrate', NULL, 0, 1, 1.0000, NULL, 'USD', 'USD', 'PKR', 'PKR', 3000.0000, 3000.0000, 2800.0000, 2800.0000, 0.0000, 0.0000, 0.0000, 0.0000, 200.0000, 200.0000, 200.0000, 200.0000, 2800.0000, 2800.0000, NULL, 1, 0, NULL, NULL, 1, '2025-12-21 18:37:09', '2025-12-21 19:03:26'),
 (12, 'asdf@gasd.asd', 'asdf', 'asdf', 'flatrate_flatrate', NULL, 0, 1, 1.0000, NULL, 'USD', 'USD', 'PKR', 'PKR', 3000.0000, 3000.0000, 2800.0000, 2800.0000, 0.0000, 0.0000, 0.0000, 0.0000, 200.0000, 200.0000, 200.0000, 200.0000, 2800.0000, 2800.0000, NULL, 1, 0, NULL, NULL, 1, '2025-12-21 18:35:16', '2025-12-21 18:36:05'),
-(14, NULL, NULL, NULL, NULL, NULL, 0, 1, 1.0000, NULL, 'USD', 'USD', 'PKR', 'PKR', 2800.0000, 2800.0000, 2800.0000, 2800.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, NULL, 1, 1, NULL, NULL, 1, '2025-12-21 19:04:36', '2025-12-21 19:04:36');
+(14, 'asdf@gasd.asd', 'asdf', '', 'flatrate_flatrate', NULL, 0, 1, 1.0000, NULL, 'USD', 'USD', 'PKR', 'PKR', 3000.0000, 3000.0000, 2800.0000, 2800.0000, 0.0000, 0.0000, 0.0000, 0.0000, 200.0000, 200.0000, 200.0000, 200.0000, 2800.0000, 2800.0000, NULL, 1, 0, NULL, NULL, 1, '2025-12-21 19:04:36', '2025-12-21 19:12:23');
 
 -- --------------------------------------------------------
 
@@ -700,8 +706,8 @@ CREATE TABLE IF NOT EXISTS `cart_items` (
   PRIMARY KEY (`id`),
   KEY `cart_items_parent_id_foreign` (`parent_id`),
   KEY `cart_items_product_id_foreign` (`product_id`),
-  KEY `cart_items_cart_id_foreign` (`cart_id`),
-  KEY `cart_items_tax_category_id_foreign` (`tax_category_id`)
+  KEY `cart_items_tax_category_id_foreign` (`tax_category_id`),
+  KEY `cart_id_index` (`cart_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -710,7 +716,7 @@ CREATE TABLE IF NOT EXISTS `cart_items` (
 
 INSERT INTO `cart_items` (`id`, `quantity`, `sku`, `type`, `name`, `coupon_code`, `weight`, `total_weight`, `base_total_weight`, `price`, `base_price`, `custom_price`, `total`, `base_total`, `tax_percent`, `tax_amount`, `base_tax_amount`, `discount_percent`, `discount_amount`, `base_discount_amount`, `price_incl_tax`, `base_price_incl_tax`, `total_incl_tax`, `base_total_incl_tax`, `applied_tax_rate`, `parent_id`, `product_id`, `cart_id`, `tax_category_id`, `applied_cart_rule_ids`, `additional`, `created_at`, `updated_at`) VALUES
 (2, 2, 'TH500', 'simple', 'Test Honey 500g', NULL, 0.5000, 1.0000, 1.0000, 2800.0000, 2800.0000, NULL, 5600.0000, 5600.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, 5600.0000, 5600.0000, NULL, NULL, 2, 2, NULL, NULL, '{\"cart_id\": 2, \"quantity\": 2, \"product_id\": 2}', '2025-12-13 22:44:57', '2025-12-13 22:45:32'),
-(7, 1, 'TH500', 'simple', 'Test Honey 500g', NULL, 0.5000, 0.5000, 0.5000, 2800.0000, 2800.0000, NULL, 2800.0000, 2800.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, 2800.0000, 2800.0000, NULL, NULL, 2, 7, NULL, NULL, '{\"cart_id\": 7, \"quantity\": 1, \"product_id\": 2}', '2025-12-14 14:16:38', '2025-12-14 14:16:38'),
+(7, 1, 'TH500', 'simple', 'Test Honey 500g', NULL, 0.5000, 0.5000, 0.5000, 2800.0000, 2800.0000, NULL, 2800.0000, 2800.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, 2800.0000, 2800.0000, NULL, NULL, 2, 7, NULL, NULL, '{\"cart_id\": 7, \"quantity\": 1, \"is_buy_now\": \"0\", \"product_id\": \"2\"}', '2025-12-14 14:16:38', '2025-12-21 19:31:09'),
 (4, 1, 'TH500', 'simple', 'Test Honey 500g', NULL, 0.5000, 0.5000, 0.5000, 2800.0000, 2800.0000, NULL, 2800.0000, 2800.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, 2800.0000, 2800.0000, NULL, NULL, 2, 4, NULL, NULL, '{\"cart_id\": 4, \"quantity\": 1, \"product_id\": 2}', '2025-12-14 12:50:32', '2025-12-14 12:52:07'),
 (5, 2, 'TH500', 'simple', 'Test Honey 500g', NULL, 0.5000, 1.0000, 1.0000, 2800.0000, 2800.0000, NULL, 5600.0000, 5600.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, 5600.0000, 5600.0000, NULL, NULL, 2, 5, NULL, NULL, '{\"cart_id\": 5, \"quantity\": 2, \"product_id\": 2}', '2025-12-14 12:50:40', '2025-12-14 12:50:46'),
 (6, 4, 'TH500', 'simple', 'Test Honey 500g', NULL, 0.5000, 2.0000, 2.0000, 2800.0000, 2800.0000, NULL, 11200.0000, 11200.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, 11200.0000, 11200.0000, NULL, NULL, 2, 6, NULL, NULL, '{\"cart_id\": 6, \"quantity\": 4, \"is_buy_now\": \"0\", \"product_id\": \"2\"}', '2025-12-14 12:51:03', '2025-12-14 12:52:19'),
@@ -754,7 +760,7 @@ CREATE TABLE IF NOT EXISTS `cart_payment` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `cart_payment_cart_id_foreign` (`cart_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `cart_payment`
@@ -765,11 +771,12 @@ INSERT INTO `cart_payment` (`id`, `method`, `method_title`, `cart_id`, `created_
 (8, 'cashondelivery', 'Cash On Delivery', 2, '2025-12-13 22:46:25', '2025-12-13 22:46:25'),
 (12, 'cashondelivery', 'Cash On Delivery', 5, '2025-12-14 14:09:47', '2025-12-14 14:09:47'),
 (14, 'cashondelivery', 'Cash On Delivery', 4, '2025-12-14 14:17:28', '2025-12-14 14:17:28'),
-(13, 'cashondelivery', 'Cash On Delivery', 7, '2025-12-14 14:16:58', '2025-12-14 14:16:58'),
+(40, 'cashondelivery', 'Cash On Delivery', 7, '2025-12-21 19:31:19', '2025-12-21 19:31:19'),
 (22, 'cashondelivery', 'Cash On Delivery', 10, '2025-12-19 14:33:25', '2025-12-19 14:33:25'),
 (26, 'cashondelivery', 'Cash On Delivery', 11, '2025-12-21 18:35:00', '2025-12-21 18:35:00'),
 (27, 'cashondelivery', 'Cash On Delivery', 12, '2025-12-21 18:35:39', '2025-12-21 18:35:39'),
-(37, 'cashondelivery', 'Cash On Delivery', 13, '2025-12-21 19:01:02', '2025-12-21 19:01:02');
+(37, 'cashondelivery', 'Cash On Delivery', 13, '2025-12-21 19:01:02', '2025-12-21 19:01:02'),
+(38, 'cashondelivery', 'Cash On Delivery', 14, '2025-12-21 19:11:40', '2025-12-21 19:11:40');
 
 -- --------------------------------------------------------
 
@@ -938,7 +945,7 @@ CREATE TABLE IF NOT EXISTS `cart_shipping_rates` (
   `cart_id` int UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `cart_shipping_rates_cart_id_foreign` (`cart_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=116 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=122 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `cart_shipping_rates`
@@ -949,10 +956,11 @@ INSERT INTO `cart_shipping_rates` (`id`, `carrier`, `carrier_title`, `method`, `
 (29, 'flatrate', 'Standard Delivery', 'flatrate_flatrate', 'Standard Delivery', 'Standard Delivery', 200, 200, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 200.0000, 200.0000, NULL, 1, 4, '2025-12-13 22:46:23', '2025-12-13 22:46:23', 2),
 (49, 'flatrate', 'Standard Delivery', 'flatrate_flatrate', 'Standard Delivery', 'Standard Delivery', 200, 200, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 200.0000, 200.0000, NULL, 1, 10, '2025-12-14 14:04:50', '2025-12-14 14:04:50', 4),
 (53, 'free', 'Free Shipping', 'free_free', 'Free Shipping', 'Free Shipping', 0, 0, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, NULL, 1, 12, '2025-12-14 14:09:45', '2025-12-14 14:09:45', 5),
-(55, 'flatrate', 'Standard Delivery', 'flatrate_flatrate', 'Standard Delivery', 'Standard Delivery', 200, 200, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 200.0000, 200.0000, NULL, 1, 15, '2025-12-14 14:16:57', '2025-12-14 14:16:57', 7),
+(121, 'flatrate', 'Standard Delivery', 'flatrate_flatrate', 'Standard Delivery', 'Standard Delivery', 200, 200, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 200.0000, 200.0000, NULL, 1, 15, '2025-12-21 19:31:19', '2025-12-21 19:31:19', 7),
 (90, 'flatrate', 'Standard Delivery', 'flatrate_flatrate', 'Standard Delivery', 'Standard Delivery', 200, 200, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 200.0000, 200.0000, NULL, 1, 23, '2025-12-19 14:37:33', '2025-12-19 14:37:33', 10),
 (97, 'flatrate', 'Standard Delivery', 'flatrate_flatrate', 'Standard Delivery', 'Standard Delivery', 200, 200, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 200.0000, 200.0000, NULL, 1, 27, '2025-12-21 18:35:38', '2025-12-21 18:35:38', 12),
-(115, 'flatrate', 'Standard Delivery', 'flatrate_flatrate', 'Standard Delivery', 'Standard Delivery', 200, 200, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 200.0000, 200.0000, NULL, 1, 31, '2025-12-21 19:01:01', '2025-12-21 19:01:01', 13);
+(115, 'flatrate', 'Standard Delivery', 'flatrate_flatrate', 'Standard Delivery', 'Standard Delivery', 200, 200, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 200.0000, 200.0000, NULL, 1, 31, '2025-12-21 19:01:01', '2025-12-21 19:01:01', 13),
+(117, 'flatrate', 'Standard Delivery', 'flatrate_flatrate', 'Standard Delivery', 'Standard Delivery', 200, 200, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 200.0000, 200.0000, NULL, 1, 35, '2025-12-21 19:11:40', '2025-12-21 19:11:40', 14);
 
 -- --------------------------------------------------------
 
@@ -2434,7 +2442,6 @@ CREATE TABLE IF NOT EXISTS `currencies` (
 --
 
 INSERT INTO `currencies` (`id`, `code`, `name`, `symbol`, `decimal`, `group_separator`, `decimal_separator`, `currency_position`, `created_at`, `updated_at`) VALUES
-(1, 'USD', 'United States Dollar', '$', 2, ',', '.', NULL, NULL, NULL),
 (2, 'PKR', 'Pakistani Rupee', 'PKR', 0, ',', '.', 'left_with_space', '2025-12-14 13:09:41', '2025-12-14 13:16:33');
 
 -- --------------------------------------------------------
@@ -3164,7 +3171,7 @@ CREATE TABLE IF NOT EXISTS `notifications` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `notifications_order_id_foreign` (`order_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `notifications`
@@ -3177,7 +3184,9 @@ INSERT INTO `notifications` (`id`, `type`, `read`, `order_id`, `created_at`, `up
 (4, 'order', 1, 4, '2025-12-14 14:18:26', '2025-12-21 18:35:49'),
 (5, 'order', 1, 5, '2025-12-14 14:18:30', '2025-12-21 18:35:49'),
 (6, 'order', 1, 6, '2025-12-21 18:36:03', '2025-12-21 18:37:19'),
-(7, 'order', 1, 7, '2025-12-21 19:03:24', '2025-12-21 19:04:22');
+(7, 'order', 1, 7, '2025-12-21 19:03:24', '2025-12-21 19:04:22'),
+(8, 'order', 1, 8, '2025-12-21 19:12:21', '2025-12-21 19:22:21'),
+(9, 'order', 0, 9, '2025-12-21 19:31:27', '2025-12-21 19:31:27');
 
 -- --------------------------------------------------------
 
@@ -3256,9 +3265,9 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `orders_increment_id_unique` (`increment_id`),
-  KEY `orders_customer_id_foreign` (`customer_id`),
-  KEY `orders_channel_id_foreign` (`channel_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  KEY `orders_channel_id_foreign` (`channel_id`),
+  KEY `customer_id_index` (`customer_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `orders`
@@ -3271,7 +3280,9 @@ INSERT INTO `orders` (`id`, `increment_id`, `status`, `channel_name`, `is_guest`
 (4, '4', 'pending', 'Default', 1, 'asdf@gasd.asd', 'asdf', 'asdf', 'free_free', 'Free Shipping - Free Shipping', 'Free Shipping', NULL, 0, 1, 2, 'USD', 'USD', 'PKR', 5600.0000, 5600.0000, 0.0000, 0.0000, 0.0000, 0.0000, 5600.0000, 5600.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 5600.0000, 5600.0000, 0.0000, 0.0000, NULL, NULL, 1, 'Webkul\\Core\\Models\\Channel', 5, NULL, '2025-12-14 14:17:25', '2025-12-14 14:17:25'),
 (5, '5', 'pending', 'Default', 1, 'asdf@gasd.asd', 'asdf', 'asdf', 'flatrate_flatrate', 'Standard Delivery - Standard Delivery', 'Standard Delivery', NULL, 0, 1, 1, 'USD', 'USD', 'PKR', 3000.0000, 3000.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 200.0000, 200.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, 200.0000, 200.0000, NULL, NULL, 1, 'Webkul\\Core\\Models\\Channel', 4, NULL, '2025-12-14 14:17:29', '2025-12-14 14:17:29'),
 (6, '6', 'pending', 'Default', 1, 'asdf@gasd.asd', 'asdf', 'asdf', 'flatrate_flatrate', 'Standard Delivery - Standard Delivery', 'Standard Delivery', NULL, 0, 1, 1, 'USD', 'PKR', 'PKR', 3000.0000, 3000.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 200.0000, 200.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, 200.0000, 200.0000, NULL, NULL, 1, 'Webkul\\Core\\Models\\Channel', 12, NULL, '2025-12-21 18:35:53', '2025-12-21 18:35:53'),
-(7, '7', 'pending', 'Default', 1, 'asdf@gasd.asd', 'asdf', 'asdf', 'flatrate_flatrate', 'Standard Delivery - Standard Delivery', 'Standard Delivery', NULL, 0, 1, 1, 'USD', 'PKR', 'PKR', 3000.0000, 3000.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 200.0000, 200.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, 200.0000, 200.0000, NULL, NULL, 1, 'Webkul\\Core\\Models\\Channel', 13, NULL, '2025-12-21 19:03:19', '2025-12-21 19:03:19');
+(7, '7', 'pending', 'Default', 1, 'asdf@gasd.asd', 'asdf', 'asdf', 'flatrate_flatrate', 'Standard Delivery - Standard Delivery', 'Standard Delivery', NULL, 0, 1, 1, 'USD', 'PKR', 'PKR', 3000.0000, 3000.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 200.0000, 200.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, 200.0000, 200.0000, NULL, NULL, 1, 'Webkul\\Core\\Models\\Channel', 13, NULL, '2025-12-21 19:03:19', '2025-12-21 19:03:19'),
+(8, '8', 'canceled', 'Default', 1, 'asdf@gasd.asd', 'asdf', '', 'flatrate_flatrate', 'Standard Delivery - Standard Delivery', 'Standard Delivery', NULL, 0, 1, 1, 'USD', 'PKR', 'PKR', 3000.0000, 3000.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 200.0000, 200.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, 200.0000, 200.0000, NULL, NULL, 1, 'Webkul\\Core\\Models\\Channel', 14, NULL, '2025-12-21 19:12:16', '2025-12-21 19:28:57'),
+(9, '9', 'pending', 'Default', 0, 'adilkhan11228@gmail.com', 'Adil', 'khan', 'flatrate_flatrate', 'Standard Delivery - Standard Delivery', 'Standard Delivery', NULL, 0, 1, 1, 'USD', 'PKR', 'PKR', 3000.0000, 3000.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 200.0000, 200.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, 200.0000, 200.0000, 1, 'Webkul\\Customer\\Models\\Customer', 1, 'Webkul\\Core\\Models\\Channel', 7, NULL, '2025-12-21 19:31:22', '2025-12-21 19:31:22');
 
 -- --------------------------------------------------------
 
@@ -3349,7 +3360,7 @@ CREATE TABLE IF NOT EXISTS `order_items` (
   KEY `order_items_order_id_foreign` (`order_id`),
   KEY `order_items_parent_id_foreign` (`parent_id`),
   KEY `order_items_tax_category_id_foreign` (`tax_category_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `order_items`
@@ -3362,7 +3373,9 @@ INSERT INTO `order_items` (`id`, `sku`, `type`, `name`, `coupon_code`, `weight`,
 (4, 'TH500', 'simple', 'Test Honey 500g', NULL, 0.5000, 1.0000, 2, 0, 0, 0, 0, 2800.0000, 2800.0000, 5600.0000, 5600.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, 5600.0000, 5600.0000, 2, 'Webkul\\Product\\Models\\Product', 4, NULL, NULL, '{\"locale\": \"en\", \"cart_id\": 5, \"quantity\": 2, \"product_id\": 2}', '2025-12-14 14:17:25', '2025-12-14 14:17:25'),
 (5, 'TH500', 'simple', 'Test Honey 500g', NULL, 0.5000, 0.5000, 1, 0, 0, 0, 0, 2800.0000, 2800.0000, 2800.0000, 2800.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, 2800.0000, 2800.0000, 2, 'Webkul\\Product\\Models\\Product', 5, NULL, NULL, '{\"locale\": \"en\", \"cart_id\": 4, \"quantity\": 1, \"product_id\": 2}', '2025-12-14 14:17:29', '2025-12-14 14:17:29'),
 (6, 'TH500', 'simple', 'Test Honey 500g', NULL, 0.5000, 0.5000, 1, 0, 0, 0, 0, 2800.0000, 2800.0000, 2800.0000, 2800.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, 2800.0000, 2800.0000, 2, 'Webkul\\Product\\Models\\Product', 6, NULL, NULL, '{\"locale\": \"en\", \"cart_id\": 12, \"quantity\": 1, \"product_id\": 2}', '2025-12-21 18:35:54', '2025-12-21 18:35:54'),
-(7, 'TH500', 'simple', 'Test Honey 500g', NULL, 0.5000, 0.5000, 1, 0, 0, 0, 0, 2800.0000, 2800.0000, 2800.0000, 2800.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, 2800.0000, 2800.0000, 2, 'Webkul\\Product\\Models\\Product', 7, NULL, NULL, '{\"locale\": \"en\", \"cart_id\": 13, \"quantity\": 1, \"product_id\": 2}', '2025-12-21 19:03:19', '2025-12-21 19:03:19');
+(7, 'TH500', 'simple', 'Test Honey 500g', NULL, 0.5000, 0.5000, 1, 0, 0, 0, 0, 2800.0000, 2800.0000, 2800.0000, 2800.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, 2800.0000, 2800.0000, 2, 'Webkul\\Product\\Models\\Product', 7, NULL, NULL, '{\"locale\": \"en\", \"cart_id\": 13, \"quantity\": 1, \"product_id\": 2}', '2025-12-21 19:03:19', '2025-12-21 19:03:19'),
+(8, 'TH500', 'simple', 'Test Honey 500g', NULL, 0.5000, 0.5000, 1, 0, 0, 1, 0, 2800.0000, 2800.0000, 2800.0000, 2800.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, 2800.0000, 2800.0000, 2, 'Webkul\\Product\\Models\\Product', 8, NULL, NULL, '{\"locale\": \"en\", \"cart_id\": 14, \"quantity\": 1, \"product_id\": 2}', '2025-12-21 19:12:16', '2025-12-21 19:28:57'),
+(9, 'TH500', 'simple', 'Test Honey 500g', NULL, 0.5000, 0.5000, 1, 0, 0, 0, 0, 2800.0000, 2800.0000, 2800.0000, 2800.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 0.0000, 2800.0000, 2800.0000, 2800.0000, 2800.0000, 2, 'Webkul\\Product\\Models\\Product', 9, NULL, NULL, '{\"locale\": \"en\", \"cart_id\": 7, \"quantity\": 1, \"is_buy_now\": \"0\", \"product_id\": \"2\"}', '2025-12-21 19:31:22', '2025-12-21 19:31:22');
 
 -- --------------------------------------------------------
 
@@ -3381,7 +3394,7 @@ CREATE TABLE IF NOT EXISTS `order_payment` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `order_payment_order_id_foreign` (`order_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `order_payment`
@@ -3394,7 +3407,9 @@ INSERT INTO `order_payment` (`id`, `order_id`, `method`, `method_title`, `additi
 (4, 4, 'cashondelivery', 'Cash On Delivery', NULL, '2025-12-14 14:17:25', '2025-12-14 14:17:25'),
 (5, 5, 'cashondelivery', 'Cash On Delivery', NULL, '2025-12-14 14:17:29', '2025-12-14 14:17:29'),
 (6, 6, 'cashondelivery', 'Cash On Delivery', NULL, '2025-12-21 18:35:53', '2025-12-21 18:35:53'),
-(7, 7, 'cashondelivery', 'Cash On Delivery', NULL, '2025-12-21 19:03:19', '2025-12-21 19:03:19');
+(7, 7, 'cashondelivery', 'Cash On Delivery', NULL, '2025-12-21 19:03:19', '2025-12-21 19:03:19'),
+(8, 8, 'cashondelivery', 'Cash On Delivery', NULL, '2025-12-21 19:12:16', '2025-12-21 19:12:16'),
+(9, 9, 'cashondelivery', 'Cash On Delivery', NULL, '2025-12-21 19:31:22', '2025-12-21 19:31:22');
 
 -- --------------------------------------------------------
 
@@ -3938,7 +3953,7 @@ CREATE TABLE IF NOT EXISTS `product_inventory_indices` (
 --
 
 INSERT INTO `product_inventory_indices` (`id`, `qty`, `product_id`, `channel_id`, `created_at`, `updated_at`) VALUES
-(1, 2, 2, 1, NULL, '2025-12-21 19:03:24');
+(1, 1, 2, 1, NULL, '2025-12-21 19:31:27');
 
 -- --------------------------------------------------------
 
@@ -3962,7 +3977,7 @@ CREATE TABLE IF NOT EXISTS `product_ordered_inventories` (
 --
 
 INSERT INTO `product_ordered_inventories` (`id`, `qty`, `product_id`, `channel_id`) VALUES
-(1, 10, 2, 1);
+(1, 11, 2, 1);
 
 -- --------------------------------------------------------
 
