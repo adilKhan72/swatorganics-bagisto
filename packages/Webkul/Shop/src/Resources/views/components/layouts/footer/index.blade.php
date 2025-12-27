@@ -20,11 +20,47 @@
         'channel_id' => $channel->id,
     ]);
 @endphp
+<a
+    href="https://wa.me/923283444141"
+    class="whatsapp-float"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Chat on WhatsApp"
+>
+    <!-- Solid WhatsApp Icon -->
+    <svg viewBox="0 0 32 32" width="26" height="26" fill="white" aria-hidden="true">
+        <path d="M16 0C7.163 0 0 7.163 0 16c0 2.837.74 5.61 2.147 8.053L0 32l8.147-2.118A15.91 15.91 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.09c-2.493 0-4.934-.668-7.06-1.93l-.505-.3-4.835 1.258 1.29-4.712-.328-.49A13.09 13.09 0 1 1 16 29.09z"/>
+    </svg>
+</a>
 
 <footer class="mt-9 bg-lightOrange max-sm:mt-10">
     <div class="flex justify-between gap-x-6 gap-y-8 p-[60px] max-1060:flex-col-reverse max-md:gap-5 max-md:p-8 max-sm:px-4 max-sm:py-5">
+        {{-- Footer Brand --}}
+        <div class="footer-brand">
+            <h4 class="footer-title">Swat Organics</h4>
+
+            <p class="footer-desc">
+                Swat Organics brings you <strong>100% pure organic products</strong> sourced directly
+                from the pristine valleys of <strong>Swat, Pakistan</strong>.
+                We focus on quality, authenticity, and natural wellness — just as nature intended.
+            </p>
+
+            <p class="footer-contact">
+                <span class="label">Email:</span>
+                <a href="mailto:contact@swatorganics.com">contact@swatorganics.com</a>
+            </p>
+
+            <p class="footer-contact">
+                <span class="label">WhatsApp:</span>
+                <a href="https://wa.me/923283444141" target="_blank">+92 328 3444141</a>
+            </p>
+
+            <p class="footer-support">
+                Customer support available <strong>7 days a week</strong>
+            </p>
+        </div>
         <!-- For Desktop View -->
-        <div class="flex flex-wrap items-start gap-24 max-1180:gap-6 max-1060:hidden">
+        <div class="footer-links flex flex-wrap items-start gap-24 max-1180:gap-6 max-1060:hidden">
             @if ($customization?->options)
                 @foreach ($customization->options as $footerLinkSection)
                     <ul class="grid gap-5 text-sm">
