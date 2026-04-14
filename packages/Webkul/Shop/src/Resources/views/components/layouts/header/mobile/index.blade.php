@@ -215,7 +215,7 @@
             <div class="icon-search pointer-events-none absolute top-3 flex items-center text-2xl max-md:text-xl max-sm:top-2.5 ltr:left-3 rtl:right-3"></div>
 
             <input
-                type="text"
+                type="search"
                 class="block w-full rounded-xl border border-['#E3E3E3'] px-11 py-3.5 text-sm font-medium text-gray-900 max-md:rounded-lg max-md:px-10 max-md:py-3 max-md:font-normal max-sm:text-xs"
                 name="query"
                 value="{{ request('query') }}"
@@ -412,7 +412,10 @@
                             :class="{'mb-2': category.children && category.children.length}"
                         >
                             <div class="flex cursor-pointer items-center justify-between py-2 transition-colors duration-200">
-                                <a :href="category.url" class="text-base font-medium text-black">
+                                <a
+                                    :href="category.url"
+                                    class="text-base font-medium text-black"
+                                >
                                     @{{ category.name }}
                                 </a>
                             </div>
@@ -427,7 +430,10 @@
                                         class="flex cursor-pointer items-center justify-between py-2 transition-colors duration-200"
                                         @click="showThirdLevel(secondLevelCategory, category, $event)"
                                     >
-                                        <a :href="secondLevelCategory.url" class="text-sm font-normal">
+                                        <a
+                                            :href="secondLevelCategory.url"
+                                            class="text-sm font-normal"
+                                        >
                                             @{{ secondLevelCategory.name }}
                                         </a>
 
@@ -489,7 +495,7 @@
                     categories: [],
                     currentViewLevel: 'main',
                     currentSecondLevelCategory: null,
-                    currentParentCategory: null
+                    currentParentCategory: null,
                 }
             },
 
@@ -544,7 +550,7 @@
 
                 goBackToMainView() {
                     this.currentViewLevel = 'main';
-                }
+                },
             },
         });
 
