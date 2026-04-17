@@ -162,7 +162,7 @@
                         <x-shop::form.control-group.control
                             type="text"
                             ::name="controlName + '.address.[{{ $i }}]'"
-                            rules="{{ core()->isCheckoutFieldRequired('address') ? 'required' : '' }}"
+                            rules=""
                             :label="trans('shop::app.checkout.onepage.address.street-address')"
                             :placeholder="trans('shop::app.checkout.onepage.address.street-address')"
                         />
