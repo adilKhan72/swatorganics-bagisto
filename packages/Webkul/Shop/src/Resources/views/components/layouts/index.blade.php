@@ -157,6 +157,18 @@
              */
             window.addEventListener("load", function (event) {
                 app.mount("#app");
+
+                const pendingFlash = sessionStorage.getItem('pendingFlash');
+
+                if (pendingFlash) {
+                    sessionStorage.removeItem('pendingFlash');
+
+                    const flash = JSON.parse(pendingFlash);
+
+                    setTimeout(() => {
+                        app.config.globalProperties.$emitter.emit('add-flash', flash);
+                    }, 300);
+                }
             });
         </script>
 
