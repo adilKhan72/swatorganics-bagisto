@@ -446,10 +446,15 @@
                             this.isAddingToCart = false;
                         })
                         .catch(error => {
-                            this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
-
                             if (error.response.data.redirect_uri) {
+                                sessionStorage.setItem('pendingFlash', JSON.stringify({
+                                    type: 'info',
+                                    message: error.response.data.message,
+                                }));
+
                                 window.location.href = error.response.data.redirect_uri;
+                            } else {
+                                this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
                             }
 
                             this.isAddingToCart = false;
