@@ -183,6 +183,7 @@
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.delivery_charges.after') !!}
 
 
+    {{-- Tax section commented out --
     <!-- Taxes -->
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.tax.before') !!}
 
@@ -213,7 +214,7 @@
 
             <p class="flex items-center gap-1 text-base font-medium max-sm:text-sm">
                 @{{ cart.formatted_tax_total }}
-                
+
                 <span
                     class="text-xl"
                     :class="{'icon-arrow-up': cart.show_taxes, 'icon-arrow-down': ! cart.show_taxes}"
@@ -241,6 +242,7 @@
     </div>
 
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.tax.after') !!}
+    --}}
 
     <!-- Cart Grand Total -->
     {!! view_render_event('bagisto.shop.checkout.onepage.summary.grand_total.before') !!}
