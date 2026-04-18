@@ -39,10 +39,12 @@
             name="currency"
             content="{{ core()->getCurrentCurrency()->toJson() }}"
         >
-        <meta 
-            name="generator" 
-            content="Bagisto"
-        >
+        {{-- Canonical URL --}}
+        <link rel="canonical" href="{{ url()->current() }}" />
+
+        {{-- Global OG / Social --}}
+        <meta property="og:site_name" content="{{ core()->getCurrentChannel()->name }}" />
+        <meta property="og:locale" content="{{ app()->getLocale() }}" />
 
         @stack('meta')
 
