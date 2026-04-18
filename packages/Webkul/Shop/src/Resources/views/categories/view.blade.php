@@ -10,6 +10,20 @@
         content="{{ $category->meta_keywords }}"
     />
 
+    {{-- OG tags for category pages --}}
+    <meta property="og:type"        content="website" />
+    <meta property="og:url"         content="{{ url()->current() }}" />
+    <meta property="og:title"       content="{{ trim($category->meta_title) != '' ? $category->meta_title : $category->name }}" />
+    <meta property="og:description" content="{{ trim($category->meta_description) != '' ? $category->meta_description : \Illuminate\Support\Str::limit(strip_tags($category->description), 160, '') }}" />
+    @if ($category->banner_url)
+        <meta property="og:image" content="{{ $category->banner_url }}" />
+    @endif
+
+    {{-- Twitter card --}}
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content="{{ trim($category->meta_title) != '' ? $category->meta_title : $category->name }}" />
+    <meta name="twitter:description" content="{{ trim($category->meta_description) != '' ? $category->meta_description : \Illuminate\Support\Str::limit(strip_tags($category->description), 160, '') }}" />
+
     @if (core()->getConfigData('catalog.rich_snippets.categories.enable'))
         <script type="application/ld+json">
             {!! app('Webkul\Product\Helpers\SEO')->getCategoryJsonLd($category) !!}

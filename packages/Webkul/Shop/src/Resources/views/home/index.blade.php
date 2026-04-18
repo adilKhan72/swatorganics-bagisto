@@ -18,6 +18,45 @@
         name="keywords"
         content="{{ $channel->home_seo['meta_keywords'] ?? '' }}"
     />
+
+    {{-- OG tags for homepage --}}
+    <meta property="og:type"        content="website" />
+    <meta property="og:url"         content="{{ url('/') }}" />
+    <meta property="og:title"       content="{{ $channel->home_seo['meta_title'] ?? $channel->name }}" />
+    <meta property="og:description" content="{{ $channel->home_seo['meta_description'] ?? '' }}" />
+    @if ($channel->logo_url)
+        <meta property="og:image" content="{{ $channel->logo_url }}" />
+    @endif
+
+    {{-- Organization Schema --}}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "{{ $channel->name }}",
+        "url": "{{ url('/') }}",
+        "logo": "{{ $channel->logo_url ?? '' }}",
+        "description": "{{ $channel->home_seo['meta_description'] ?? '' }}",
+        "sameAs": []
+    }
+    </script>
+
+    {{-- WebSite SearchAction Schema --}}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": "{{ url('/') }}",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "{{ url('/search') }}?query={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
 @endPush
 
 @push('scripts')
