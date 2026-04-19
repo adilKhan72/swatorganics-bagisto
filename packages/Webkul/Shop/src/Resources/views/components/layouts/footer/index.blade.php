@@ -21,7 +21,7 @@
     ]);
 @endphp
 <a
-    href="https://wa.me/923283444141"
+    href="https://wa.me/923713092727"
     class="whatsapp-float"
     target="_blank"
     rel="noopener noreferrer"
@@ -52,7 +52,7 @@
 
             <p class="footer-contact">
                 <span class="label">WhatsApp:</span>
-                <a href="https://wa.me/923283444141" target="_blank">+92 328 3444141</a>
+                <a href="https://wa.me/923713092727" target="_blank">+92 371 3092727</a>
             </p>
 
             <p class="footer-support">
