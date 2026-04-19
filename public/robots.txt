@@ -9,5 +9,4 @@ Disallow: /*?*
 Allow: /storage/
 Allow: /
 
-# Replace YOUR_DOMAIN with your actual domain before going live
-# Sitemap: https://YOUR_DOMAIN/storage/sitemaps/sitemap.xml
+Sitemap: https://swatorganics.com/storage/sitemaps/sitemap.xml
