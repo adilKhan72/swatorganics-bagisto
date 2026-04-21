@@ -78,9 +78,11 @@ $SSH "
   cd $REMOTE_DIR
   php artisan storage:link --force 2>&1
   php artisan optimize:clear 2>&1
+  php artisan responsecache:clear 2>&1
   php artisan config:cache 2>&1
   php artisan route:cache 2>&1
   php artisan view:cache 2>&1
+  rm -rf /home/invobphd/lscache/* 2>/dev/null || true
   echo 'Cache cleared and rebuilt.'
 "
 
