@@ -12,6 +12,7 @@
 >
     <head>
 
+        @if(config('tracking.meta_pixel_id'))
         <!-- Meta Pixel Code -->
         <script>
           !function(f,b,e,v,n,t,s)
@@ -22,22 +23,25 @@
           t.src=v;s=b.getElementsByTagName(e)[0];
           s.parentNode.insertBefore(t,s)}(window, document,'script',
           'https://connect.facebook.net/en_US/fbevents.js');
-          fbq('init', '1669242764493112');
+          fbq('init', '{{ config("tracking.meta_pixel_id") }}');
           fbq('track', 'PageView');
         </script>
         <noscript><img height="1" width="1" style="display:none"
-          src="https://www.facebook.com/tr?id=1669242764493112&ev=PageView&noscript=1"
+          src="https://www.facebook.com/tr?id={{ config('tracking.meta_pixel_id') }}&ev=PageView&noscript=1"
         /></noscript>
         <!-- End Meta Pixel Code -->
+        @endif
 
+        @if(config('tracking.ga4_id'))
         <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-GVBSVKJR9K"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('tracking.ga4_id') }}"></script>
         <script>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-GVBSVKJR9K');
+          gtag('config', '{{ config("tracking.ga4_id") }}');
         </script>
+        @endif
 
         {!! view_render_event('bagisto.shop.layout.head.before') !!}
 
