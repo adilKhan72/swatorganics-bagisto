@@ -2,6 +2,13 @@
 # SwatOrganics — Production Deployment Script
 # Run from local machine: bash deploy.sh
 # Requires: SSH shell access enabled on server, key at ~/.ssh/id_rsa_swatorganics_deploy_nopass
+#
+# --- Live DB access (for manual queries) ---
+# SSH in:  ssh -i ~/.ssh/id_rsa_swatorganics_deploy_nopass -p 21098 invobphd@server703.web-hosting.com
+# Then:    mysql -u invobphd_swatorganicsuser "-p%FcC;c_sfaG&w,2" invobphd_swatorganics
+# Or run a one-liner from local:
+#   bash deploy.sh db "SELECT * FROM orders LIMIT 5;"
+# -------------------------------------------
 
 SSH_KEY="$HOME/.ssh/id_rsa_swatorganics_deploy_nopass"
 SSH_USER="invobphd"
@@ -9,9 +16,24 @@ SSH_HOST="server703.web-hosting.com"
 SSH_PORT="21098"
 REMOTE_DIR="/home/invobphd/swatorganics"
 REPO="https://github.com/adilKhan72/swatorganics-bagisto.git"
+DB_NAME="invobphd_swatorganics"
+DB_USER="invobphd_swatorganicsuser"
+DB_PASS='%FcC;c_sfaG&w,2'
 
 SSH="ssh -i $SSH_KEY -p $SSH_PORT -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST"
 SCP="scp -i $SSH_KEY -P $SSH_PORT -o StrictHostKeyChecking=no"  # used for .env upload
+
+# Shortcut: bash deploy.sh db "SELECT * FROM orders LIMIT 5;"
+if [ "$1" = "db" ]; then
+  $SSH "mysql -u $DB_USER \"-p$DB_PASS\" $DB_NAME -e \"$2\" 2>&1"
+  exit 0
+fi
+
+# Shortcut: bash deploy.sh tinker (opens Laravel tinker on production)
+if [ "$1" = "tinker" ]; then
+  ssh -i $SSH_KEY -p $SSH_PORT -t $SSH_USER@$SSH_HOST "cd $REMOTE_DIR && php artisan tinker"
+  exit 0
+fi
 
 echo "======================================"
 echo " SwatOrganics Deployment"
