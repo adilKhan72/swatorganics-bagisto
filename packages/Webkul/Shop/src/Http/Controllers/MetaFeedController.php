@@ -182,7 +182,7 @@ class MetaFeedController extends Controller
             $price,                                          // price
             $link,                                           // link
             $imageUrl,                                       // image_link
-            'Swat Organics',                                 // brand
+            config('tracking.brand_name', 'Swat Organics'),   // brand
             'Food, Beverages & Tobacco > Food Items',        // google_product_category
             'Food & Grocery',                                // fb_product_category
             $qty,                                            // quantity_to_sell_on_facebook
@@ -195,7 +195,7 @@ class MetaFeedController extends Controller
             'adult',                                         // age_group
             '',                                              // material
             '',                                              // pattern
-            'PK::Standard:0.00 PKR',                        // shipping (free in Pakistan)
+            config('tracking.feed_shipping_country', 'PK').'::Standard:0.00 '.core()->getCurrentCurrencyCode(), // shipping
             '',                                              // shipping_weight
             '',                                              // offer_disclaimer
             '',                                              // offer_disclaimer_url
