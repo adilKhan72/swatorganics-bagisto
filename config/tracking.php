@@ -33,4 +33,12 @@ return [
     */
     'feed_shipping_country' => env('FEED_SHIPPING_COUNTRY', 'PK'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Facebook Domain Verification
+    |--------------------------------------------------------------------------
+    | Set FB_DOMAIN_VERIFICATION in your .env file. Leave empty to disable.
+    */
+    'fb_domain_verification' => env('FB_DOMAIN_VERIFICATION', ''),
+
 ];
