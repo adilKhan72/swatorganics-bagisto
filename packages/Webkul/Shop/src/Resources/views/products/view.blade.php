@@ -678,6 +678,37 @@
             });
         </script>
 
+        @php
+            $metaPrice = $product->getTypeInstance()->getMinimalPrice();
+            $metaCurrency = core()->getCurrentCurrencyCode();
+        @endphp
+
+        <script>
+            // Meta Pixel — ViewContent
+            window.addEventListener('load', function () {
+                if (typeof fbq === 'undefined') return;
+
+                fbq('track', 'ViewContent', {
+                    content_ids:  ['{{ $product->id }}'],
+                    content_type: 'product_group',
+                    content_name: @json($product->name),
+                    value:        {{ (float) $metaPrice }},
+                    currency:     '{{ $metaCurrency }}',
+                });
+
+                // Meta Pixel — AddToCart (fires when cart is updated after add)
+                app.config.globalProperties.$emitter.on('update-mini-cart', function () {
+                    fbq('track', 'AddToCart', {
+                        content_ids:  ['{{ $product->id }}'],
+                        content_type: 'product_group',
+                        content_name: @json($product->name),
+                        value:        {{ (float) $metaPrice }},
+                        currency:     '{{ $metaCurrency }}',
+                    });
+                });
+            });
+        </script>
+
         <script
             type="text/x-template"
             id="v-product-associations-template"
