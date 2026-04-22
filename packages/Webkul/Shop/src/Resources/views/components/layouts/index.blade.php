@@ -43,6 +43,8 @@
         </script>
         @endif
 
+        <meta name="facebook-domain-verification" content="co3qu9n93tot68mfoi7v3r6pswqsg4" />
+
         {!! view_render_event('bagisto.shop.layout.head.before') !!}
 
         <title>{{ $title ?? '' }}</title>
