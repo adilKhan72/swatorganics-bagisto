@@ -28,6 +28,13 @@
     RewriteRule ^ index.php [L]
 </IfModule>
 
+# Disable LiteSpeed cache for auth/account/checkout/API pages
+<IfModule LiteSpeed>
+    <LocationMatch "^/(customer|checkout|cart|api/)">
+        CacheLookup off
+    </LocationMatch>
+</IfModule>
+
 # Security Headers
 <IfModule mod_headers.c>
     Header always set X-Content-Type-Options "nosniff"
