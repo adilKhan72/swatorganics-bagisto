@@ -1,3 +1,22 @@
+@push('scripts')
+    @php
+        $metaContentIds = $order->items->pluck('product_id')->map(fn($id) => (string) $id)->toArray();
+        $metaTotal      = (float) $order->grand_total;
+        $metaCurrency   = core()->getCurrentCurrencyCode();
+    @endphp
+    <script>
+        window.addEventListener('load', function () {
+            if (typeof fbq === 'undefined') return;
+            fbq('track', 'Purchase', {
+                content_ids:  @json($metaContentIds),
+                content_type: 'product',
+                value:        {{ $metaTotal }},
+                currency:     '{{ $metaCurrency }}',
+            });
+        });
+    </script>
+@endpush
+
 <x-shop::layouts
 	:has-header="true"
 	:has-feature="false"
