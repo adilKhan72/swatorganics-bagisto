@@ -39,12 +39,23 @@ class SEO
         }
 
         if (core()->getConfigData('catalog.rich_snippets.products.show_reviews')) {
-            $data['review'] = $this->getProductReviews($product);
+            $reviews = $this->getProductReviews($product);
+            if (! empty($reviews)) {
+                $data['review'] = $reviews;
+            }
         }
 
         if (core()->getConfigData('catalog.rich_snippets.products.show_ratings')) {
-            $data['aggregateRating'] = $this->getProductAggregateRating($product);
+            $aggregateRating = $this->getProductAggregateRating($product);
+            if ($aggregateRating !== null) {
+                $data['aggregateRating'] = $aggregateRating;
+            }
         }
+
+        $data['brand'] = [
+            '@type' => 'Brand',
+            'name'  => 'Swat Organics',
+        ];
 
         if (core()->getConfigData('catalog.rich_snippets.products.show_offers')) {
             $data['offers'] = $this->getProductOffers($product);
@@ -131,10 +142,19 @@ class SEO
     {
         $reviewHelper = app('Webkul\Product\Helpers\Review');
 
+        $reviewCount = (int) $reviewHelper->getTotalReviews($product);
+        $ratingValue = (float) $reviewHelper->getAverageRating($product);
+
+        if ($reviewCount < 1 || $ratingValue < 1) {
+            return null;
+        }
+
         return [
             '@type'       => 'AggregateRating',
-            'ratingValue' => $reviewHelper->getAverageRating($product),
-            'reviewCount' => $reviewHelper->getTotalReviews($product),
+            'ratingValue' => round($ratingValue, 1),
+            'reviewCount' => $reviewCount,
+            'bestRating'  => '5',
+            'worstRating' => '1',
         ];
     }
 
@@ -151,6 +171,42 @@ class SEO
             'priceCurrency' => core()->getCurrentCurrencyCode(),
             'price'         => $product->getTypeInstance()->getMinimalPrice(),
             'availability'  => 'https://schema.org/InStock',
+            'url'           => route('shop.product_or_category.index', $product->url_key),
+            'hasMerchantReturnPolicy' => [
+                '@type'                    => 'MerchantReturnPolicy',
+                'applicableCountry'        => 'PK',
+                'returnPolicyCategory'     => 'https://schema.org/MerchantReturnFiniteReturnWindow',
+                'merchantReturnDays'       => 7,
+                'returnMethod'             => 'https://schema.org/ReturnByMail',
+                'returnFees'               => 'https://schema.org/FreeReturn',
+            ],
+            'shippingDetails' => [
+                '@type'               => 'OfferShippingDetails',
+                'shippingRate'        => [
+                    '@type'    => 'MonetaryAmount',
+                    'value'    => '0',
+                    'currency' => 'PKR',
+                ],
+                'shippingDestination' => [
+                    '@type'           => 'DefinedRegion',
+                    'addressCountry'  => 'PK',
+                ],
+                'deliveryTime' => [
+                    '@type'         => 'ShippingDeliveryTime',
+                    'handlingTime'  => [
+                        '@type'   => 'QuantitativeValue',
+                        'minValue'=> 0,
+                        'maxValue'=> 1,
+                        'unitCode'=> 'DAY',
+                    ],
+                    'transitTime'   => [
+                        '@type'   => 'QuantitativeValue',
+                        'minValue'=> 2,
+                        'maxValue'=> 5,
+                        'unitCode'=> 'DAY',
+                    ],
+                ],
+            ],
         ];
     }
 
