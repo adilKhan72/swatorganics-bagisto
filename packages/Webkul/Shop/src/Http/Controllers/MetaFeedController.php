@@ -151,9 +151,9 @@ class MetaFeedController extends Controller
             $description = substr($description, 0, 9996) . '...';
         }
 
-        // Availability
+        // Availability — product_inventory_indices only has `qty`, no is_in_stock column
         $inventoryIndex = $product->inventory_indices->first();
-        $inStock        = $inventoryIndex && $inventoryIndex->is_in_stock;
+        $inStock        = $inventoryIndex && (int) $inventoryIndex->qty > 0;
         $availability   = $inStock ? 'in stock' : 'out of stock';
 
         // Price — Meta format: "1200.00 PKR"
