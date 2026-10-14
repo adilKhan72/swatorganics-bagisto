@@ -5,7 +5,7 @@
 #
 # --- Live DB access (for manual queries) ---
 # SSH in:  ssh -i ~/.ssh/id_rsa_swatorganics_deploy_nopass -p 21098 invobphd@server703.web-hosting.com
-# Then:    mysql -u invobphd_swatorganicsuser "-pREDACTED_SEE_DEPLOY_ENV" invobphd_swatorganics
+# Then:    mysql -u invobphd_swatorganicsuser "-p$DB_PASS" invobphd_swatorganics
 # Or run a one-liner from local:
 #   bash deploy.sh db "SELECT * FROM orders LIMIT 5;"
 # -------------------------------------------
@@ -18,7 +18,10 @@ REMOTE_DIR="/home/invobphd/swatorganics"
 REPO="https://github.com/adilKhan72/swatorganics-bagisto.git"
 DB_NAME="invobphd_swatorganics"
 DB_USER="invobphd_swatorganicsuser"
-DB_PASS='REDACTED_SEE_DEPLOY_ENV'
+# DB password is NOT stored in git. Create .deploy.env (git-ignored) next to this script containing:
+#   DB_PASS='your-db-password'
+[ -f "$(dirname "$0")/.deploy.env" ] && source "$(dirname "$0")/.deploy.env"
+: "${DB_PASS:?DB_PASS not set - create .deploy.env (see comment above)}"
 
 SSH="ssh -i $SSH_KEY -p $SSH_PORT -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST"
 SCP="scp -i $SSH_KEY -P $SSH_PORT -o StrictHostKeyChecking=no"  # used for .env upload

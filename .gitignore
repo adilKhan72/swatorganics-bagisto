@@ -31,3 +31,6 @@ yarn.lock
 yarn-error.log
 /test-results
 /playwright-report
+
+# deploy secrets
+.deploy.env
