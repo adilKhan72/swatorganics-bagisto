@@ -3,7 +3,7 @@
         <v-field
             type="text"
             name="{{ $attribute->code }}"
-            :rules="{{ $attribute->validations }}"
+            :rules="'{{ trim($attribute->validations, '{} ') }}'"
             value="{{ old($attribute->code) ?: $product[$attribute->code] }}"
             v-slot="{ field }"
             label="{{ $attribute->admin_name }}"

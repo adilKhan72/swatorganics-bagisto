@@ -1,2 +1,12 @@
 User-agent: *
-Disallow:
+Disallow: /admin/
+Disallow: /checkout/
+Disallow: /cart/
+Disallow: /customer/
+Disallow: /api/
+Disallow: /storage/logs/
+Disallow: /*?*
+Allow: /storage/
+Allow: /
+
+Sitemap: https://swatorganics.com/storage/sitemaps/sitemap.xml

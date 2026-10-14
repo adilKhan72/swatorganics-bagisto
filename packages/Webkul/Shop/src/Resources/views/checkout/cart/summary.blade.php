@@ -13,12 +13,7 @@
 
     <!-- Cart Totals -->
     <div class="mt-6 grid gap-4 max-md:mt-2 max-md:gap-2.5">
-        <!-- Estimate Tax and Shipping -->
-        @if (core()->getConfigData('sales.checkout.shopping_cart.estimate_shipping'))
-            <template v-if="cart.have_stockable_items">
-                @include('shop::checkout.cart.summary.estimate-shipping')
-            </template>
-        @endif
+        {{-- Estimate shipping removed: Pakistan-only store, threshold-based logic shown directly --}}
 
         <!-- Sub Total -->
         {!! view_render_event('bagisto.shop.checkout.cart.summary.sub_total.before') !!}
@@ -96,57 +91,30 @@
 
         {!! view_render_event('bagisto.shop.checkout.cart.summary.coupon.after') !!}
 
-        <!-- Shipping Rates -->
+        <!-- Delivery Charges -->
         {!! view_render_event('bagisto.shop.checkout.onepage.summary.delivery_charges.before') !!}
-        
-        <template v-if="displayTax.shipping == 'including_tax'">
-            <div class="flex justify-between text-right">
-                <p class="text-base max-sm:text-sm">
-                    @lang('shop::app.checkout.cart.summary.delivery-charges')
-                </p>
 
+        <div class="flex justify-between text-right">
+            <p class="text-base max-sm:text-sm">
+                @lang('shop::app.checkout.cart.summary.delivery-charges')
+            </p>
+
+            <template v-if="parseFloat(cart.sub_total) >= 6000">
+                <p class="text-base font-medium text-green-600 max-sm:text-sm">
+                    Free
+                </p>
+            </template>
+
+            <template v-else>
                 <p class="text-base font-medium max-sm:text-sm">
-                    @{{ cart.formatted_shipping_amount_incl_tax }}
+                    Rs.200
                 </p>
-            </div>
-        </template>
-
-        <template v-else-if="displayTax.shipping == 'both'">
-            <div class="flex justify-between text-right">
-                <p class="text-base max-sm:text-sm">
-                    @lang('shop::app.checkout.cart.summary.delivery-charges-excl-tax')
-                </p>
-
-                <p class="text-base font-medium max-sm:text-sm">
-                    @{{ cart.formatted_shipping_amount }}
-                </p>
-            </div>
-            
-            <div class="flex justify-between text-right">
-                <p class="text-base max-sm:text-sm">
-                    @lang('shop::app.checkout.cart.summary.delivery-charges-incl-tax')
-                </p>
-
-                <p class="text-base font-medium max-sm:text-sm">
-                    @{{ cart.formatted_shipping_amount_incl_tax }}
-                </p>
-            </div>
-        </template>
-
-        <template v-else>
-            <div class="flex justify-between text-right">
-                <p class="text-base max-sm:text-sm">
-                    @lang('shop::app.checkout.cart.summary.delivery-charges')
-                </p>
-
-                <p class="text-base font-medium max-sm:text-sm">
-                    @{{ cart.formatted_shipping_amount }}
-                </p>
-            </div>
-        </template>
+            </template>
+        </div>
 
         {!! view_render_event('bagisto.shop.checkout.onepage.summary.delivery_charges.after') !!}
 
+        {{-- Tax section commented out --
         <!-- Taxes -->
         {!! view_render_event('bagisto.shop.checkout.cart.summary.tax.before') !!}
 
@@ -177,7 +145,7 @@
 
                 <p class="flex items-center gap-1 text-base font-medium max-md:font-medium max-sm:text-sm">
                     @{{ cart.formatted_tax_total }}
-                    
+
                     <span
                         class="text-xl"
                         :class="{'icon-arrow-up': cart.show_taxes, 'icon-arrow-down': ! cart.show_taxes}"
@@ -205,6 +173,7 @@
         </div>
 
         {!! view_render_event('bagisto.shop.checkout.cart.summary.tax.after') !!}
+        --}}
    
         <!-- Cart Grand Total -->
         {!! view_render_event('bagisto.shop.checkout.cart.summary.grand_total.before') !!}
@@ -215,7 +184,12 @@
             </p>
 
             <p class="text-lg font-semibold max-md:text-base">
-                @{{ cart.formatted_grand_total }}
+                <template v-if="parseFloat(cart.sub_total) >= 6000">
+                    @{{ cart.formatted_grand_total }}
+                </template>
+                <template v-else>
+                    @{{ 'Rs.' + (parseFloat(cart.sub_total) + 200).toLocaleString('en', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }}
+                </template>
             </p>
         </div>
 

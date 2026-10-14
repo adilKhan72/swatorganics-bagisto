@@ -12,6 +12,41 @@
 >
     <head>
 
+        @if(config('tracking.meta_pixel_id'))
+        <!-- Meta Pixel Code -->
+        <script>
+          !function(f,b,e,v,n,t,s)
+          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '{{ config("tracking.meta_pixel_id") }}');
+          fbq('track', 'PageView');
+        </script>
+        <noscript><img height="1" width="1" style="display:none"
+          src="https://www.facebook.com/tr?id={{ config('tracking.meta_pixel_id') }}&ev=PageView&noscript=1"
+        /></noscript>
+        <!-- End Meta Pixel Code -->
+        @endif
+
+        @if(config('tracking.ga4_id'))
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('tracking.ga4_id') }}"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '{{ config("tracking.ga4_id") }}');
+        </script>
+        @endif
+
+        @if(config('tracking.fb_domain_verification'))
+        <meta name="facebook-domain-verification" content="{{ config('tracking.fb_domain_verification') }}" />
+        @endif
+
         {!! view_render_event('bagisto.shop.layout.head.before') !!}
 
         <title>{{ $title ?? '' }}</title>
@@ -39,10 +74,12 @@
             name="currency"
             content="{{ core()->getCurrentCurrency()->toJson() }}"
         >
-        <meta 
-            name="generator" 
-            content="Bagisto"
-        >
+        {{-- Canonical URL --}}
+        <link rel="canonical" href="{{ url()->current() }}" />
+
+        {{-- Global OG / Social --}}
+        <meta property="og:site_name" content="{{ core()->getCurrentChannel()->name }}" />
+        <meta property="og:locale" content="{{ app()->getLocale() }}" />
 
         @stack('meta')
 
@@ -68,12 +105,12 @@
 
         <link
             rel="preload" as="style"
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Serif+Display&family=Josefin+Sans:wght@300;400;600;700&display=swap"
         />
 
         <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Serif+Display&family=Josefin+Sans:wght@300;400;600;700&display=swap"
         />
 
         @stack('styles')
@@ -157,6 +194,18 @@
              */
             window.addEventListener("load", function (event) {
                 app.mount("#app");
+
+                const pendingFlash = sessionStorage.getItem('pendingFlash');
+
+                if (pendingFlash) {
+                    sessionStorage.removeItem('pendingFlash');
+
+                    const flash = JSON.parse(pendingFlash);
+
+                    setTimeout(() => {
+                        app.config.globalProperties.$emitter.emit('add-flash', flash);
+                    }, 300);
+                }
             });
         </script>
 
