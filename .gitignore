@@ -30,3 +30,7 @@ yarn.lock
 yarn-error.log
 /test-results
 /playwright-report
+
+# local DB backups — never commit
+database/bkp/
+*.sql
