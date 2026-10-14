@@ -1,5 +1,6 @@
 .env
-.env.testing
+.env.*
+/database/*.sql
 .idea
 .php_cs.cache
 .phpunit.result.cache
@@ -34,3 +35,5 @@ yarn-error.log
 # local DB backups — never commit
 database/bkp/
 *.sql
+# deploy secrets
+.deploy.env

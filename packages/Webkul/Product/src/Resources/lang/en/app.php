@@ -10,7 +10,7 @@ return [
             'invalid-file-extension'   => 'Invalid file extension found.',
             'inventory-warning'        => 'The requested quantity is not available, please try again later.',
             'missing-links'            => 'Downloadable links are missing for this product.',
-            'missing-options'          => 'Options are missing for this product.',
+            'missing-options'          => 'Please select your preferred size to continue.',
             'selected-products-simple' => 'Selected products must be of simple product type.',
         ],
     ],

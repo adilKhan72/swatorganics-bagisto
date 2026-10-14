@@ -1,3 +1,9 @@
+@php
+    $metaContentIds = $order->items->pluck('product_id')->map(fn($id) => (string) $id)->toArray();
+    $metaTotal      = (float) $order->grand_total;
+    $metaCurrency   = core()->getCurrentCurrencyCode();
+@endphp
+
 <x-shop::layouts
 	:has-header="true"
 	:has-feature="false"
@@ -57,4 +63,23 @@
 			{{ view_render_event('bagisto.shop.checkout.success.continue-shopping.after', ['order' => $order]) }}
 		</div>
 	</div>
+
+    @push('scripts')
+        <script>
+            // Meta Pixel — Purchase (fire directly, fbq is synchronously defined in <head>)
+            (function firePurchase() {
+                if (typeof fbq !== 'undefined') {
+                    fbq('track', 'Purchase', {
+                        content_ids:  @json($metaContentIds),
+                        content_type: 'product',
+                        value:        {{ $metaTotal }},
+                        currency:     '{{ $metaCurrency }}',
+                    });
+                } else {
+                    setTimeout(firePurchase, 200);
+                }
+            })();
+        </script>
+    @endpush
+
 </x-shop::layouts>
