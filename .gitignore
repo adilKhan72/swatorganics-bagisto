@@ -37,3 +37,6 @@ database/bkp/
 *.sql
 # deploy secrets
 .deploy.env
+
+# local AI-assistant notes
+.claude/
