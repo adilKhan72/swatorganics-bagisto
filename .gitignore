@@ -34,3 +34,6 @@ yarn-error.log
 
 # deploy secrets
 .deploy.env
+
+# local AI-assistant notes
+.claude/
